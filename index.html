@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1020"><meta name="description" content="DevPocket — a pocket-sized offline developer toolkit."><title>DevPocket — Developer Toolkit</title>
+<style>
+:root{--bg:#080c17;--panel:#101729;--panel2:#151e33;--line:#26314a;--text:#edf2ff;--muted:#8d9ab7;--accent:#8b7cff;--accent2:#50d6c6;--danger:#ff7188;--radius:18px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#26234b 0,transparent 38%),var(--bg);color:var(--text);min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:1120px;margin:auto;padding:20px 18px 44px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#8b7cff,#4fddc7);display:grid;place-items:center;color:#08111c;font-weight:900;font-size:21px;box-shadow:0 8px 28px #655bff33}.brand h1{font-size:20px;margin:0;letter-spacing:-.6px}.brand p{margin:3px 0 0;font-size:12px;color:var(--muted)}.pill{border:1px solid #2d3a54;border-radius:99px;padding:8px 11px;color:#b5c3df;font-size:12px;background:#11182a}.hero{margin:0 0 24px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent2);font-weight:800}.hero h2{font-size:clamp(28px,5vw,42px);letter-spacing:-1.5px;line-height:1.08;margin:10px 0}.hero p{color:var(--muted);max-width:620px;line-height:1.6;margin:0}.searchwrap{margin:22px 0 18px;position:relative}.search{width:100%;background:#101729;border:1px solid var(--line);border-radius:14px;padding:14px 16px 14px 44px;color:var(--text);outline:none}.search:focus{border-color:var(--accent)}.searchicon{position:absolute;left:15px;top:13px;color:var(--muted)}.categories{display:flex;gap:8px;overflow:auto;padding:2px 0 12px;scrollbar-width:none}.categories button{white-space:nowrap;border:1px solid var(--line);background:#101729;color:#aebbd6;border-radius:99px;padding:9px 14px;font-size:12px}.categories button.active{background:#28244d;border-color:#665be0;color:#e5e2ff}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.toolcard{border:1px solid var(--line);background:linear-gradient(145deg,#131b2d,#0e1423);border-radius:var(--radius);padding:17px;min-height:150px;text-align:left;color:inherit;transition:transform .15s,border-color .15s;display:flex;flex-direction:column;gap:10px}.toolcard:hover{transform:translateY(-2px);border-color:#655bd1}.toolicon{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:#272447;color:#b8b0ff;font-size:19px;font-weight:700}.toolcard h3{font-size:15px;margin:0}.toolcard p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}.toolcard .tag{margin-top:auto;color:#6fd8c8;font-size:10px;text-transform:uppercase;letter-spacing:1px}.footer{text-align:center;color:#64718c;font-size:11px;margin:32px 0 8px}.modal{position:fixed;inset:0;background:#030610d9;display:none;align-items:flex-end;justify-content:center;padding:14px;z-index:10}.modal.open{display:flex}.dialog{--tool-h:250;--tool-color:hsl(var(--tool-h) 82% 70%);width:min(760px,100%);max-height:92vh;overflow:auto;background:#0f1728;border:1px solid #2b3650;border-radius:22px;padding:20px;box-shadow:0 24px 100px #0008}.dialoghead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.dialoghead h2{font-size:20px;margin:0;color:var(--tool-color)}.dialog .btn.primary{background:linear-gradient(135deg,hsl(var(--tool-h) 78% 64%),hsl(var(--tool-h) 72% 52%))}.dialog .field input:focus,.dialog .field textarea:focus,.dialog .field select:focus{border-color:var(--tool-color);box-shadow:0 0 0 3px hsl(var(--tool-h) 80% 60% / .12)}.dialog .result{border-color:hsl(var(--tool-h) 60% 60% / .25)}.close{border:1px solid var(--line);background:#172137;color:#c6d1e8;width:36px;height:36px;border-radius:11px;font-size:20px}.field{margin:12px 0}.field label{display:block;color:#aab6d0;font-size:12px;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;background:#080e1c;border:1px solid #2a3650;border-radius:12px;padding:12px;color:var(--text);outline:none}.field textarea{min-height:180px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;line-height:1.5}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}.actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.btn{border:1px solid #3a4560;background:#1a2439;color:#e6edff;border-radius:11px;padding:10px 13px;font-size:12px;font-weight:700}.btn.primary{background:linear-gradient(135deg,#8b7cff,#6d63e8);border:0;color:#fff}.btn.good{border-color:#27675e;color:#7de2d1}.btn:active{transform:scale(.98)}.result{border:1px solid #293650;background:#080e1b;border-radius:12px;padding:12px;white-space:pre-wrap;word-break:break-word;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;min-height:44px;color:#bfeee6}.note{font-size:11px;color:var(--muted);line-height:1.5}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.colorrow{display:flex;gap:12px;align-items:center}.colorrow input[type=color]{width:60px;height:44px;padding:4px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#202b42;border:1px solid #3a4967;color:#e9f2ff;padding:10px 15px;border-radius:99px;font-size:12px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}.toast.show{opacity:1}.empty{grid-column:1/-1;color:var(--muted);text-align:center;padding:40px 12px}.sectiontitle{display:flex;justify-content:space-between;align-items:center;margin:18px 0 12px;color:#9aa8c4;font-size:12px}.sectiontitle strong{color:#dfe7fa;font-size:13px}
+
+/* Motion system: transform/opacity only for smooth, compositor-friendly animation */
+:root{--ease:cubic-bezier(.2,.75,.25,1)}
+body{overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;pointer-events:none;width:34vw;height:34vw;max-width:420px;max-height:420px;border-radius:50%;opacity:.12;filter:blur(48px);will-change:transform}
+body:before{background:#7568ff;top:-12vw;left:-12vw;animation:ambientA 18s ease-in-out infinite alternate}
+body:after{background:#39d8c3;right:-14vw;bottom:-12vw;animation:ambientB 22s ease-in-out infinite alternate}
+.logo{animation:logoFloat 5s ease-in-out infinite;will-change:transform}
+.toolcard{position:relative;overflow:hidden;transform:translateZ(0);transition:transform .22s var(--ease),border-color .22s,background .22s;animation:cardIn .38s var(--ease) both}
+.toolcard:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 20%,#ffffff0b 45%,transparent 70%);transform:translateX(-130%);transition:transform .55s var(--ease)}
+.toolcard:hover:after{transform:translateX(130%)}
+.toolcard:hover{transform:translateY(-4px) scale(1.008);border-color:#7168e8;background:linear-gradient(145deg,#19233a,#10182a)}
+.toolcard:active{transform:scale(.985)}
+.toolicon{transition:transform .25s var(--ease),background .25s}
+.toolcard:hover .toolicon{transform:translateY(-2px) rotate(-5deg) scale(1.06);background:#302b58}
+.categories button,.btn,.close,.search{transition:transform .18s var(--ease),border-color .18s,background .18s,color .18s}
+.categories button:active,.btn:active{transform:scale(.96)}
+.search:focus{box-shadow:0 0 0 3px #8b7cff22}
+.modal{opacity:0;transition:opacity .2s var(--ease);pointer-events:none}
+.modal.open{opacity:1;pointer-events:auto}
+.dialog{transform:translateY(18px) scale(.99);transition:transform .24s var(--ease);will-change:transform}
+.modal.open .dialog{transform:translateY(0) scale(1)}
+.toast{transition:opacity .18s,transform .18s var(--ease);transform:translate(-50%,12px)}
+.toast.show{transform:translate(-50%,0)}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ambientA{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(12vw,8vh,0) scale(1.12)}}
+@keyframes ambientB{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-10vw,-8vh,0) scale(1.08)}}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media(hover:none){.toolcard:hover{transform:none}.toolcard:hover:after{transform:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* DevPocket glass + pill interaction refresh */
+:root{--pill:999px;--surface:rgba(18,27,47,.78);--stroke:rgba(139,124,255,.22)}
+body{background:linear-gradient(145deg,#080c17 0%,#0b1222 48%,#080d18 100%);background-attachment:fixed}
+body:before,body:after{opacity:.16;filter:blur(54px);contain:strict}
+.app{position:relative}
+.topbar{padding:10px 12px;border:1px solid #ffffff0d;border-radius:var(--pill);background:rgba(12,18,32,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.logo{border-radius:var(--pill);box-shadow:0 0 0 5px #8b7cff10,0 8px 24px #655bff30}
+.pill{border-radius:var(--pill);padding:9px 14px;white-space:nowrap}
+.search{border-radius:var(--pill);background:rgba(16,23,41,.82);padding-left:48px}
+.categories{padding:5px 2px 14px;scroll-snap-type:x proximity}
+.categories button{border-radius:var(--pill);padding:10px 16px;scroll-snap-align:start;backdrop-filter:blur(8px)}
+.categories button.active{box-shadow:0 5px 20px #7669ff20}
+.grid{gap:15px}
+.toolcard{--tool-h:250;--tool-color:hsl(var(--tool-h) 82% 70%);--tool-glow:hsl(var(--tool-h) 80% 60% / .16);border-radius:24px;background:linear-gradient(145deg,hsl(var(--tool-h) 36% 17% / .92),rgba(12,19,33,.92));backdrop-filter:blur(10px);border-color:#ffffff10;min-height:166px;padding:18px}
+.toolcard h3{letter-spacing:-.25px;color:var(--tool-color)}.toolcard:before{content:"";position:absolute;inset:auto -24px -38px auto;width:130px;height:130px;border-radius:50%;background:var(--tool-glow);filter:blur(20px);pointer-events:none}.toolcard .toolicon{background:hsl(var(--tool-h) 48% 25% / .85);color:var(--tool-color);border:1px solid hsl(var(--tool-h) 70% 70% / .22)}.toolcard .tag{border-color:hsl(var(--tool-h) 70% 65% / .2);background:hsl(var(--tool-h) 70% 65% / .08);color:var(--tool-color)}.toolcard:hover{border-color:hsl(var(--tool-h) 75% 68% / .6)}
+.toolcard .tag{display:inline-flex;align-self:flex-start;border:1px solid #52d8c51c;background:#45d6c20c;border-radius:var(--pill);padding:5px 9px;letter-spacing:.6px}
+.toolicon{border-radius:16px}
+.toolcard .fav{position:absolute;top:13px;right:13px;width:32px;height:32px;border-radius:var(--pill);border:1px solid #ffffff12;background:#ffffff06;color:#9ba8c4;display:grid;place-items:center;font-size:16px;z-index:2}
+.toolcard .fav.on{color:#ffcf70;background:#ffcf7015;border-color:#ffcf7040}
+.sectiontitle{gap:10px}
+.sectiontitle strong{border-radius:var(--pill);background:#8b7cff15;border:1px solid #8b7cff25;padding:7px 12px}
+.sectiontitle .viewpill{border-radius:var(--pill);border:1px solid #ffffff13;background:#ffffff05;color:#aab7d0;padding:7px 12px}
+.dialog{border-radius:28px;background:linear-gradient(145deg,#111a2d,#0b1220);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.close,.btn{border-radius:var(--pill)}
+.field input,.field textarea,.field select,.result{border-radius:18px}
+.actions .btn{padding:11px 16px}
+.toast{border-radius:var(--pill);backdrop-filter:blur(12px)}
+.hero h2 span{background:linear-gradient(90deg,#b5aaff,#70e7d6,#b5aaff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradientFlow 8s ease-in-out infinite}
+@keyframes gradientFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@media(max-width:780px){.topbar{border-radius:22px}.toolcard{border-radius:21px}}
+@media(prefers-reduced-motion:reduce){.hero h2 span{animation:none}}
+
+@media(max-width:780px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app{padding:16px 14px 32px}.hero h2{font-size:32px}}@media(max-width:430px){.grid{gap:10px}.toolcard{padding:14px;min-height:145px}.toolcard h3{font-size:14px}.toolcard p{font-size:11px}.pill{font-size:10px}.split{grid-template-columns:1fr}.dialog{padding:16px;border-radius:20px}.modal{padding:8px}}
+
+/* NOVA SLAYER visual overhaul */
+:root{--bg:#070912;--panel:#0d1221;--panel2:#141b2e;--line:#27334b;--text:#f2f5ff;--muted:#8998b6;--accent:#9d7cff;--accent2:#53f2cf;--hot:#ff5f9e;--ease:cubic-bezier(.16,1,.3,1);--pill:999px}
+html{scroll-behavior:smooth}body{background:#070912;isolation:isolate}
+body:before,body:after{content:"";position:fixed;z-index:-2;pointer-events:none;border-radius:50%;width:48vw;height:48vw;max-width:680px;max-height:680px;filter:blur(65px);opacity:.17;will-change:transform}
+body:before{background:radial-gradient(circle,#7456ff,transparent 68%);top:-22vw;left:-18vw;animation:aurora1 24s ease-in-out infinite alternate}
+body:after{background:radial-gradient(circle,#00d6bd,transparent 68%);right:-24vw;bottom:-24vw;animation:aurora2 29s ease-in-out infinite alternate}
+.app{max-width:1240px;padding:24px 22px 50px}
+.topbar{position:sticky;top:12px;z-index:5;padding:11px 15px;border:1px solid #ffffff14;border-radius:var(--pill);background:#0b1020c9;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 12px 36px #0003}
+.logo{border-radius:15px;background:linear-gradient(135deg,#a78bfa,#4ff4d1);box-shadow:0 0 24px #8b5cf633;animation:logoPulse 4s ease-in-out infinite}
+.brand h1{letter-spacing:-1px}.brand p{letter-spacing:.2px}
+.hero{position:relative;padding:36px 0 22px}.hero:after{content:"DEV TOOLKIT / LOCAL-FIRST";position:absolute;right:2px;top:42px;font:700 10px/1.4 ui-monospace,monospace;letter-spacing:2px;color:#697796;writing-mode:vertical-rl}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #53f2cf30;background:#53f2cf0b;border-radius:var(--pill);padding:7px 12px;letter-spacing:1.7px}
+.eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent2);box-shadow:0 0 12px var(--accent2)}
+.hero h2{font-size:clamp(36px,6.4vw,66px);letter-spacing:-2.8px;line-height:.98;margin:18px 0 14px}.hero h2 span{background:linear-gradient(100deg,#b7a4ff 5%,#5cf5d3 48%,#ff75b6 95%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradientFlow 10s ease-in-out infinite}
+.hero p{font-size:14px;max-width:580px}
+.searchwrap{margin:24px 0 20px}.search{border-radius:var(--pill);padding:15px 20px 15px 48px;background:#0d1425d9;border-color:#ffffff16;box-shadow:0 8px 30px #0002}.search:focus{border-color:#9d7cff;box-shadow:0 0 0 4px #9d7cff1b,0 8px 30px #0002}
+.categories{gap:9px;padding-bottom:16px}.categories button,.viewpill{border-radius:var(--pill);padding:10px 16px;background:#0d1424;border-color:#ffffff14;font-weight:650}.categories button.active{background:linear-gradient(110deg,#8b5cf633,#53f2cf15);border-color:#9d7cff80;box-shadow:0 5px 22px #8b5cf61c}
+.sectiontitle{justify-content:flex-start;gap:12px;margin:20px 0 15px}.sectiontitle strong{border-radius:var(--pill);padding:7px 12px;background:#9d7cff18;border:1px solid #9d7cff35}.sectiontitle span{margin-left:auto}
+.grid{gap:14px}.toolcard{border-radius:22px;min-height:174px;padding:18px;background:linear-gradient(145deg,#11192bdf,#0b1120f2);border-color:#ffffff12;box-shadow:0 8px 22px #00000012;backdrop-filter:blur(8px);animation:cardRise .42s var(--ease) both;transition:transform .2s var(--ease),border-color .2s,box-shadow .2s}
+.toolcard:before{content:"";position:absolute;left:0;top:20px;bottom:20px;width:2px;border-radius:var(--pill);background:linear-gradient(var(--accent),var(--accent2));opacity:0;transform:scaleY(.5);transition:opacity .2s,transform .2s var(--ease)}
+.toolcard:hover{transform:translateY(-5px);border-color:#9d7cff66;box-shadow:0 16px 34px #0003,0 0 0 1px #9d7cff0c}.toolcard:hover:before{opacity:1;transform:scaleY(1)}
+.toolicon{border-radius:14px;background:linear-gradient(145deg,#29264b,#152d3b);border:1px solid #ffffff0b;color:#c6baff;box-shadow:inset 0 1px #ffffff0b;transition:transform .2s var(--ease)}.toolcard:hover .toolicon{transform:rotate(-6deg) scale(1.08)}
+.toolcard h3{font-size:15px;letter-spacing:-.3px}.toolcard p{font-size:12px}.toolcard .tag{border-radius:var(--pill);padding:5px 9px;background:#53f2cf0b;border:1px solid #53f2cf1c;letter-spacing:1px}
+.toolcard .fav{border-radius:var(--pill);width:31px;height:31px;display:grid;place-items:center;background:#ffffff07;border:1px solid #ffffff12;transition:transform .18s var(--ease)}.toolcard .fav:active{transform:scale(.82)}
+.modal{align-items:center;padding:18px;background:#03050bd9;backdrop-filter:blur(10px)}.dialog{border-radius:26px;border-color:#ffffff18;background:linear-gradient(145deg,#121a2d,#090f1c);box-shadow:0 30px 100px #0008}.dialoghead{position:sticky;top:-20px;padding:6px 0 12px;background:linear-gradient(#121a2d 80%,transparent);z-index:1}.close{border-radius:var(--pill)}
+.field input,.field textarea,.field select,.result{border-radius:15px;border-color:#ffffff14;background:#080d18}.btn{border-radius:var(--pill);padding:11px 16px}.btn.primary{background:linear-gradient(110deg,#8b5cf6,#6d5df0 55%,#4bcdbf);box-shadow:0 7px 20px #7c5cff28}.btn:hover{border-color:#9d7cff88;filter:brightness(1.08)}
+.footer{margin-top:46px;padding:23px 12px;border:1px solid #ffffff12;border-radius:24px;background:linear-gradient(120deg,#101729aa,#0a111eaa);color:#7f8eab;line-height:1.8}.footer .maker{display:block;font:800 13px/1.5 ui-monospace,monospace;letter-spacing:1.5px;color:#e8e9ff}.footer .maker b{background:linear-gradient(90deg,#b6a4ff,#5cf5d3);-webkit-background-clip:text;background-clip:text;color:transparent}.footer .sub{font-size:11px;letter-spacing:.5px}
+.toast{border-radius:var(--pill);border-color:#ffffff1c;background:#121b2d;box-shadow:0 10px 35px #0005}
+@keyframes aurora1{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(13vw,8vh,0) scale(1.14)}}
+@keyframes aurora2{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-12vw,-9vh,0) scale(1.12)}}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 0 0 #8b5cf600,0 0 22px #8b5cf630}50%{box-shadow:0 0 0 5px #8b5cf60c,0 0 30px #53f2cf22}}
+@keyframes cardRise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:780px){.app{padding:14px 13px 34px}.topbar{top:7px}.hero{padding-top:28px}.hero:after{display:none}.hero h2{letter-spacing:-1.8px}.toolcard{min-height:165px}}
+@media(prefers-reduced-motion:reduce){body:before,body:after,.logo,.hero h2 span{animation:none!important}}
+@media(hover:none){.toolcard:hover{transform:none;box-shadow:none}.toolcard:hover:before{opacity:0}}
+
+
+/* Stability patch: preserve app rendering; lightweight motion only */
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+.toolcard,.btn,.categories button,.close{transition:transform .18s ease,opacity .18s ease,border-color .18s ease}
+.toolcard{contain:layout style}
+.toolcard:active,.btn:active,.categories button:active{transform:scale(.98)}
+.modal.open .dialog{animation:dpSheetIn .28s cubic-bezier(.2,.75,.25,1) both}
+@keyframes dpSheetIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){*{-webkit-tap-highlight-color:transparent}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* Neon-lime / ultraviolet refresh with restrained glass */
+:root{--bg:#090a13;--panel:#121522;--panel2:#1a1d2c;--line:#2b3044;--accent:#b6ff4a;--accent2:#a58bff;--text:#f3f5ff;--muted:#9da3bb}
+body{background:radial-gradient(ellipse at 8% 0%,#31245a 0,transparent 36%),radial-gradient(ellipse at 95% 18%,#1d3c36 0,transparent 32%),linear-gradient(160deg,#090a13,#0d1020 55%,#080a11);background-attachment:fixed}
+.topbar{background:rgba(16,18,31,.72);border:1px solid #ffffff12;border-radius:24px;padding:12px 16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.logo{background:linear-gradient(135deg,#b6ff4a,#8b73ff);color:#111;box-shadow:0 0 26px #b6ff4a22}
+.toolcard{border-radius:22px;background:linear-gradient(145deg,#171a2a,#10121e);border-color:#ffffff12;box-shadow:0 8px 24px #0002;transition:transform .2s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .2s}
+.toolcard:hover{transform:translateY(-3px);border-color:#b6ff4a66;box-shadow:0 14px 30px #0003,0 0 0 1px #b6ff4a10}
+.toolicon{background:linear-gradient(135deg,#b6ff4a20,#a58bff25);color:#caff86;border:1px solid #b6ff4a20;border-radius:14px}
+.tag,.fav,.categories button,.btn,.close{border-radius:999px}
+.categories button.active,.btn.primary{background:linear-gradient(110deg,#b6ff4a,#d2ff8a);color:#15170e;border-color:transparent;box-shadow:0 6px 22px #b6ff4a20}
+.search,.field input,.field textarea,.field select,.result{border-radius:17px;background:#0b0e18;border-color:#30364d}
+.modal{background:rgba(3,5,12,.68);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);opacity:0;transition:opacity .22s ease}
+.modal.open{opacity:1;animation:dpOverlayIn .22s ease both}
+.dialog{transform:translateY(34px) scale(.985);opacity:0;will-change:transform,opacity}
+.modal.open .dialog{animation:dpDialogIn .42s cubic-bezier(.16,1,.3,1) .02s both}
+@keyframes dpOverlayIn{from{opacity:0}to{opacity:1}}
+@keyframes dpDialogIn{0%{opacity:0;transform:translateY(38px) scale(.98)}65%{opacity:1;transform:translateY(-3px) scale(1)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.timerface{font-size:clamp(48px,12vw,76px);font-weight:800;letter-spacing:-3px;text-align:center;padding:22px;color:#caff86;text-shadow:0 0 28px #b6ff4a25}
+html{scroll-behavior:smooth;scroll-padding-top:18px}
+body{overscroll-behavior-y:contain}
+.grid{gap:14px}
+@media(max-width:700px){.toolcard{transform:none!important;box-shadow:none}.dialog{border-radius:24px 24px 16px 16px;max-height:88dvh;padding:17px}.modal{padding:8px;align-items:flex-end}}
+@media(prefers-reduced-motion:reduce){.modal,.dialog{animation:none!important;transition:none!important;transform:none!important;opacity:1}}
+
+:root{--accent:#c7ff4f;--accent2:#b39aff}
+body{background:radial-gradient(ellipse at 12% 4%,#39285f66,transparent 34%),radial-gradient(ellipse at 92% 28%,#174b3d55,transparent 30%),linear-gradient(155deg,#080a12,#111426 52%,#080a11);background-attachment:fixed}
+.topbar{border:1px solid #ffffff16;background:rgba(15,17,30,.74);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);box-shadow:0 10px 30px #0002}
+.toolcard{border-radius:24px;background:linear-gradient(145deg,#191c2d,#10121e);border:1px solid #ffffff13}
+.toolcard:hover{border-color:#c7ff4f55;box-shadow:0 12px 28px #0003,0 0 0 1px #c7ff4f0c}
+.toolicon{border-radius:15px;background:linear-gradient(135deg,#c7ff4f20,#b39aff2b);color:#d4ff8c}
+.modal{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modal.open .dialog{animation:dpDialogIn .5s cubic-bezier(.16,1,.3,1) both}
+@keyframes dpDialogIn{0%{opacity:0;transform:translateY(42px) scale(.975)}70%{opacity:1;transform:translateY(-2px) scale(1)}100%{opacity:1;transform:translateY(0) scale(1)}}
+html{scroll-behavior:smooth}
+
+/* UI options: accessible controls, light theme, sort toolbar */
+.toolbar-options{display:flex;align-items:center;gap:8px;margin-left:auto}
+.toolbar-options select,.toolbar-options button{border:1px solid #ffffff18;background:#0d1424;color:#cbd5ef;border-radius:999px;padding:9px 12px;font-size:12px;min-height:36px}
+.searchclear{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:#ffffff0b;color:#aebbd6;border-radius:50%;width:28px;height:28px;display:grid;place-items:center}
+.toolcard[tabindex]{cursor:pointer}.toolcard:focus-visible,.fav:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #a99aff;outline-offset:3px}
+body.light{--bg:#f4f6fc;--panel:#fff;--panel2:#eef1fb;--line:#d9deed;--text:#172033;--muted:#5f6c85;color-scheme:light;background:linear-gradient(145deg,#f7f8ff,#edf5f7)}
+body.light .topbar,body.light .toolcard,body.light .dialog,body.light .footer{background:#ffffffd9;border-color:#dce2f0;color:#172033}
+body.light .pill,body.light .categories button,body.light .toolbar-options select,body.light .toolbar-options button{background:#f0f3fb;color:#46516a;border-color:#d9deed}
+body.light .search,body.light .field input,body.light .field textarea,body.light .field select,body.light .result{background:#fff;color:#172033;border-color:#d9deed}
+body.light .dialoghead{background:linear-gradient(#fff 80%,transparent)}body.light .toolcard p,body.light .hero p{color:#5f6c85}
+@media(max-width:560px){.sectiontitle{flex-wrap:wrap}.sectiontitle span{display:none}.toolbar-options{margin-left:0;width:100%}.toolbar-options select{flex:1}.sectiontitle strong{margin-right:auto}}
+@media(prefers-reduced-motion:reduce){body:before,body:after,.logo{animation:none!important}}
+
+/* Ultra Pro Max responsive polish */
+:root{
+ --dp-ease:cubic-bezier(.16,1,.3,1);
+ --dp-glass:rgba(15,20,36,.78);
+ --dp-ring:0 0 0 3px rgba(199,255,79,.18);
+}
+html{scroll-padding-top:18px}
+body{min-height:100dvh;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+.app{width:min(100%,1240px);padding:clamp(12px,2.4vw,28px) clamp(12px,2.2vw,24px) 48px}
+.topbar{position:sticky;top:8px;z-index:5;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);margin-bottom:clamp(22px,4vw,42px)}
+.brand h1{font-weight:850;letter-spacing:-.8px}
+.hero{max-width:820px}
+.hero h2{font-size:clamp(32px,6.2vw,58px);letter-spacing:-2px}
+.hero p{font-size:clamp(13px,1.5vw,15px)}
+.searchwrap{position:sticky;top:78px;z-index:4;padding:4px 0;background:linear-gradient(to bottom,rgba(8,10,18,.94),rgba(8,10,18,.0));}
+.search{min-height:52px;padding-right:48px;font-size:15px;box-shadow:0 8px 26px #0002}
+.search::placeholder{color:#77839f}
+.categories{gap:9px;padding-bottom:16px}
+.categories button{min-height:40px;transition:transform .18s var(--dp-ease),background .2s,border-color .2s}
+.categories button.active{background:linear-gradient(135deg,#302b56,#202b3c);border-color:#9b8cff;color:#fff}
+.sectiontitle{gap:12px;margin:12px 0 16px}
+.sectiontitle strong{font-size:14px}
+.toolbar-options select,.toolbar-options button,.viewpill{min-height:40px;border-radius:12px}
+.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(10px,1.4vw,16px);contain:layout style}
+.toolcard{min-height:168px;padding:clamp(15px,1.8vw,20px);border-radius:22px;isolation:isolate;backface-visibility:hidden}
+.toolcard h3{font-size:15px;line-height:1.35;letter-spacing:-.15px}
+.toolcard p{font-size:12.5px;line-height:1.55}
+.toolcard .tag{font-weight:750}
+.toolicon{width:44px;height:44px;font-size:20px}
+.toolcard:focus-visible{outline:2px solid #c7ff4f;outline-offset:3px}
+button,input,textarea,select{-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #c7ff4f;outline-offset:2px}
+.btn{min-height:42px;transition:transform .18s var(--dp-ease),filter .18s,box-shadow .18s}
+.btn:hover{filter:brightness(1.12)}
+.btn.primary{box-shadow:0 7px 22px #8b7cff20}
+.field input,.field textarea,.field select{font-size:16px}
+.dialog{overscroll-behavior:contain;scrollbar-gutter:stable;max-height:min(90dvh,900px)}
+.modal{align-items:center;padding:clamp(10px,3vw,28px)}
+.modal.open{animation:dpBackdrop .22s ease both}
+.dialog{width:min(820px,100%);border-radius:26px}
+.dialoghead{position:sticky;top:-20px;z-index:2;padding:8px 0 12px;background:linear-gradient(#0f1728 78%,transparent)}
+body.light .dialoghead{background:linear-gradient(#fff 78%,transparent)}
+.footer{display:flex;flex-direction:column;gap:7px;line-height:1.5}
+.toast{max-width:calc(100vw - 28px);text-align:center;white-space:normal;z-index:30}
+@keyframes dpBackdrop{from{opacity:0}to{opacity:1}}
+@keyframes dpCardReveal{from{opacity:0;transform:translate3d(0,12px,0) scale(.99)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+.toolcard{animation:dpCardReveal .42s var(--dp-ease) both}
+.toolcard:nth-child(3n+2){animation-delay:35ms}
+.toolcard:nth-child(3n){animation-delay:70ms}
+@media(min-width:1500px){.app{max-width:1380px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:760px){
+ .app{padding:12px 12px 34px}
+ .topbar{top:5px;border-radius:18px;padding:10px}
+ .pill{font-size:10px;padding:8px 10px}
+ .hero h2{letter-spacing:-1.4px}
+ .searchwrap{top:70px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .toolcard{min-height:158px;padding:14px;border-radius:19px}
+ .toolicon{width:38px;height:38px;border-radius:12px}
+ .sectiontitle{align-items:center}
+ .sectiontitle span{display:none}
+ .toolbar-options{width:auto;margin-left:auto}
+}
+@media(max-width:460px){
+ .brand{gap:9px}.logo{width:36px;height:36px;font-size:18px}
+ .brand h1{font-size:17px}.brand p{font-size:10px}
+ .topbar>div:last-child{gap:6px!important}
+ .pill{max-width:90px;overflow:hidden;text-overflow:ellipsis}
+ .hero{margin-bottom:16px}
+ .hero h2{font-size:34px}
+ .searchwrap{margin:16px 0 12px}
+ .search{min-height:48px;font-size:14px}
+ .categories button{padding:9px 13px;font-size:11px;min-height:36px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .toolcard{min-height:150px;padding:12px;gap:8px}
+ .toolcard h3{font-size:13px}
+ .toolcard p{font-size:11px;line-height:1.4}
+ .toolcard .tag{font-size:9px}
+ .toolicon{width:34px;height:34px;font-size:17px}
+ .sectiontitle{gap:8px}
+ .sectiontitle strong{font-size:12px}
+ .toolbar-options select{max-width:145px;font-size:11px;padding:8px}
+ .modal{align-items:flex-end;padding:0}
+ .dialog{width:100%;max-height:92dvh;border-radius:24px 24px 0 0;padding:16px 14px calc(16px + env(safe-area-inset-bottom));border-bottom:0}
+ .dialoghead{top:-16px}
+ .field textarea{min-height:140px}
+}
+@media(max-width:340px){.grid{grid-template-columns:1fr}.toolcard{min-height:132px}.toolbar-options select{max-width:120px}}
+@media(hover:hover) and (pointer:fine){.toolcard:hover{box-shadow:0 16px 34px #0003,0 0 0 1px var(--tool-color,#c7ff4f) inset}}
+@media(hover:none){.toolcard:active{transform:scale(.975);transition-duration:.12s}}
+@media(prefers-reduced-motion:reduce){
+ .toolcard,.toolcard:nth-child(n),.logo,body:before,body:after{animation:none!important}
+ .toolcard,.btn,.categories button,.dialog,.modal{transition:none!important}
+}
+
+
+/* DevPocket navigation polish: low-cost transitions, sticky filters, accessible focus */
+.categories{position:sticky;top:58px;z-index:5;background:linear-gradient(180deg,var(--bg) 78%,transparent);padding-top:10px;backdrop-filter:blur(10px)}
+.sectiontitle{position:sticky;top:108px;z-index:4;padding:9px 0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);flex-wrap:wrap;gap:10px}
+.toolcard{content-visibility:auto;contain-intrinsic-size:170px}
+.toolcard:focus-visible,.categories button:focus-visible,.btn:focus-visible,.viewpill:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
+.searchwrap{position:sticky;top:0;z-index:7;padding-top:4px;background:var(--bg)}
+@media(max-width:680px){.app{padding:12px 12px 30px}.hero{margin-bottom:18px}.hero h2{font-size:clamp(27px,8vw,36px)}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.toolcard{padding:13px;min-height:142px}.toolcard h3{font-size:13px}.toolcard p{font-size:11px}.sectiontitle>span{display:none}.categories{top:54px}.sectiontitle{top:104px}}
+@media(max-width:380px){.grid{grid-template-columns:1fr}.toolcard{min-height:unset}.sectiontitle{top:96px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+
+.catcount{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:7px;padding:0 5px;border-radius:99px;background:#ffffff12;color:inherit;font-size:10px;font-weight:750;line-height:1}
+.categories button.active .catcount{background:#b6ff4a22;color:var(--accent2)}
+.searchclear{z-index:2}
+@media(min-width:681px){.categories{top:58px}.sectiontitle{top:108px}}
+
+</style>
+<style id="devpocket-donation-info">
+.footer{display:block;text-align:left;padding:clamp(16px,3vw,28px)}
+.donate-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;padding:clamp(16px,3vw,24px);border:1px solid #7469d955;border-radius:22px;background:radial-gradient(ellipse at 0 0,#5147a526,transparent 55%),linear-gradient(135deg,#151d32,#101626)}
+.donate-mark{width:44px;height:44px;display:grid;place-items:center;border-radius:15px;background:#ff6f9b1c;color:#ff8eb0;font-size:22px}
+.donate-kicker{font-size:10px;font-weight:800;letter-spacing:1.7px;color:var(--accent2)}
+.donate-copy h2{font-size:clamp(20px,3vw,26px);letter-spacing:-.6px;margin:5px 0 8px;color:var(--text)}
+.donate-copy>p{margin:0;color:var(--muted);font-size:13px;line-height:1.65;max-width:680px}
+.upi-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 12px;padding:10px 12px;border:1px solid #ffffff14;background:#080e1b88;border-radius:13px}
+.upi-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.upi-row code{font-size:13px;color:#e7eaff;font-weight:700;overflow-wrap:anywhere}
+.donate-copy-btn,.donate-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:10px 14px;border-radius:11px;font-size:12px;font-weight:800;text-decoration:none;transition:transform 150ms var(--dp-ease),filter 150ms var(--dp-ease)}
+.donate-copy-btn{border:1px solid #3b4561;background:#1a2439;color:#e8edff}
+.donate-btn{background:linear-gradient(120deg,#9b8aff,#57d9c8);color:#08111b}
+.donate-copy-btn:active,.donate-btn:active{transform:scale(.975)}
+.donate-note{font-size:10px!important;margin-top:10px!important}
+.about-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0;padding-bottom:18px;border-bottom:1px solid #ffffff12}
+.about-grid>div{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid #ffffff10;border-radius:13px;background:#ffffff04}
+.about-grid strong{font-size:12px;color:#dfe7fa}.about-grid span{font-size:11px;line-height:1.5;color:var(--muted)}
+.footer>.maker,.footer>.sub{display:block;text-align:center;margin-top:8px}
+@media(max-width:560px){.donate-card{grid-template-columns:1fr}.donate-mark{width:38px;height:38px}.about-grid{grid-template-columns:1fr}.upi-row{gap:8px}.upi-row code{flex:1}}
+@media(prefers-reduced-motion:reduce){.donate-copy-btn,.donate-btn{transition:none}}
+.upi-row{border:1px solid #b6ff4a66;background:linear-gradient(110deg,#b6ff4a18,#8f7cff16);box-shadow:inset 0 0 0 1px #b6ff4a0b}
+.upi-row code{font-size:clamp(14px,2.4vw,17px);letter-spacing:.2px;color:#d8ff9b;background:#101a20;border:1px solid #b6ff4a44;border-radius:9px;padding:9px 12px;box-shadow:0 0 18px #b6ff4a12}
+.donate-copy-btn{border-color:#b6ff4a66;background:linear-gradient(135deg,#b6ff4a,#8ce86b);color:#10180b;white-space:nowrap;cursor:pointer}
+.donate-copy-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.contact-card{margin:16px 0;padding:clamp(16px,3vw,22px);border:1px solid #ffffff16;border-radius:20px;background:linear-gradient(135deg,#171f32,#111827)}
+.contact-heading{display:flex;align-items:center;gap:12px}.contact-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#8f7cff20;color:#b9adff;font-size:20px}
+.contact-heading h3{margin:4px 0 0;font-size:20px;color:var(--text)}.contact-card>p{margin:12px 0;color:var(--muted);font-size:13px;line-height:1.6}
+.contact-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.contact-link{display:flex;align-items:center;gap:11px;min-width:0;padding:13px;border:1px solid #ffffff14;border-radius:13px;background:#ffffff05;color:var(--text);text-decoration:none;transition:transform 160ms var(--dp-ease),border-color 160ms var(--dp-ease),background 160ms var(--dp-ease)}
+.contact-link:hover{transform:translateY(-2px);border-color:#8f7cff66;background:#8f7cff0c}.contact-link>span:first-child{font-size:18px;color:#b6ff4a}.contact-link>span:nth-child(2){display:flex;flex-direction:column;gap:4px;min-width:0}.contact-link small{font-size:10px;color:var(--muted)}.contact-link strong{font-size:12px;overflow-wrap:anywhere}.contact-arrow{margin-left:auto;color:var(--muted)}
+@media(max-width:560px){.contact-links{grid-template-columns:1fr}.contact-link{min-height:58px}.upi-row code{flex:1;min-width:0}}
+@media(prefers-reduced-motion:reduce){.contact-link{transition:none}}
+</style>
+<style id="devpocket-fluid-motion">
+:root{--dp-ease:cubic-bezier(.22,.75,.25,1);--dp-fast:150ms;--dp-medium:230ms}
+html{scroll-behavior:smooth;scroll-padding-top:118px}
+button,.toolcard,.categories button,.search,.field input,.field textarea,.field select,.dialog,.toast,.pill,.viewpill{transition-timing-function:var(--dp-ease)}
+.toolcard{transition:transform var(--dp-fast) var(--dp-ease),border-color var(--dp-medium) var(--dp-ease),background-color var(--dp-medium) var(--dp-ease)}
+.categories button{transition:color var(--dp-fast) var(--dp-ease),background-color var(--dp-fast) var(--dp-ease),border-color var(--dp-fast) var(--dp-ease),transform var(--dp-fast) var(--dp-ease)}
+.categories button:active{transform:scale(.97)}
+.btn,.close,.viewpill{transition:transform var(--dp-fast) var(--dp-ease),background-color var(--dp-fast) var(--dp-ease),border-color var(--dp-fast) var(--dp-ease),color var(--dp-fast) var(--dp-ease)}
+.btn:active,.close:active,.viewpill:active{transform:scale(.975)}
+.search,.field input,.field textarea,.field select{transition:border-color var(--dp-medium) var(--dp-ease),box-shadow var(--dp-medium) var(--dp-ease)}
+.modal{transition:opacity var(--dp-medium) var(--dp-ease),visibility var(--dp-medium) var(--dp-ease)}
+.modal.open .dialog{animation:dpFluidIn 300ms var(--dp-ease) both}
+@keyframes dpFluidIn{from{opacity:0;transform:translate3d(0,12px,0) scale(.99)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+.toast.show{animation:dpToastIn 220ms var(--dp-ease) both}
+@keyframes dpToastIn{from{opacity:0;transform:translate3d(-50%,8px,0)}to{opacity:1;transform:translate3d(-50%,0,0)}}
+@media(hover:hover) and (pointer:fine){.toolcard:hover{transform:translate3d(0,-3px,0)}.toolcard:active{transform:translate3d(0,-1px,0) scale(.995)}}
+@media(hover:none){.toolcard{transition:transform 120ms var(--dp-ease),border-color var(--dp-fast) var(--dp-ease)}.toolcard:active{transform:scale(.985)}}
+@media(max-width:700px){html{scroll-padding-top:104px}.modal.open .dialog{animation:dpFluidSheetIn 280ms var(--dp-ease) both}@keyframes dpFluidSheetIn{from{opacity:.75;transform:translate3d(0,18px,0)}to{opacity:1;transform:translate3d(0,0,0)}}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+<style id="nova-slayer-signature">
+.ns-maker{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:15px;margin:24px auto 10px;padding:20px clamp(14px,4vw,30px);max-width:620px;border:1px solid #9c8cff42;border-radius:20px;background:radial-gradient(ellipse at 12% 50%,#8b5cf625,transparent 42%),linear-gradient(120deg,#111827,#17152b 55%,#101827);box-shadow:0 12px 34px #05071155,inset 0 1px #ffffff0b;text-align:left}
+.ns-maker:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;background:linear-gradient(110deg,transparent 20%,#a78bfa12 48%,transparent 72%);transform:translateX(-60%);animation:nsSheen 7s ease-in-out infinite}
+.ns-emblem{position:relative;flex:0 0 52px;width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#a78bfa,#6d5ce7 58%,#4f46e5);box-shadow:0 7px 22px #8b5cf633,inset 0 1px #ffffff66;transform:rotate(-5deg)}
+.ns-emblem span{font-size:29px;font-weight:950;letter-spacing:-3px;color:#fff;text-shadow:0 2px 9px #24164d88}.ns-emblem i{position:absolute;width:9px;height:9px;right:5px;top:5px;border-radius:50%;background:#c4ff73;box-shadow:0 0 12px #c4ff73aa}
+.ns-maker-copy{min-width:0}.ns-overline{display:block;font-size:9px;font-weight:800;letter-spacing:2px;color:#b9adff;margin-bottom:5px}.ns-made{font-size:11px;letter-spacing:1.5px;color:#aeb7cc;font-weight:800}.ns-made strong{display:inline-block;margin-left:5px;font-size:clamp(17px,3.5vw,23px);letter-spacing:.4px;color:#f4f1ff;font-weight:950}.ns-made em{font-style:normal;background:linear-gradient(100deg,#c4b5fd,#a5f3fc 70%,#c4ff73);background-clip:text;-webkit-background-clip:text;color:transparent}.ns-creator{display:block;margin-top:5px;font-size:9px;letter-spacing:1.7px;color:#8e9ab2}.ns-creator b{color:#c4ff73;padding:0 4px}.ns-signature{margin-left:auto;align-self:center;font-size:15px;font-weight:950;letter-spacing:-1px;color:#ffffff16}.ns-signature span{color:#c4ff7366;font-size:10px;vertical-align:top;margin-left:3px}.ns-dot{font-style:normal;color:#b6ff4a;font-size:9px;margin:0 5px}
+@keyframes nsSheen{0%,65%,100%{transform:translateX(-70%)}80%{transform:translateX(70%)}}
+@media(max-width:420px){.ns-maker{gap:11px;padding:16px 12px;border-radius:16px}.ns-emblem{flex-basis:44px;width:44px;height:44px;border-radius:13px}.ns-emblem span{font-size:25px}.ns-made{font-size:9px;letter-spacing:1px}.ns-made strong{font-size:17px;margin-left:3px}.ns-overline{font-size:8px;letter-spacing:1.4px}.ns-creator{font-size:8px;letter-spacing:1.1px}.ns-signature{display:none}}
+@media(prefers-reduced-motion:reduce){.ns-maker:before{animation:none}}
+</style>
+<style id="devpocket-performance-guard">
+/* Keep the UI responsive on mid-range phones: no continuously animated blurred layers or per-card blur surfaces. */
+body:before,body:after{display:none!important;animation:none!important;filter:none!important;will-change:auto!important}
+.logo,.hero h2 span,.ns-maker:before{animation:none!important}
+.hero h2 span{background-size:100% 100%!important}
+.ns-maker:before{transform:none!important;opacity:.16}
+.toolcard{animation:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;will-change:auto!important}
+.categories button{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.dialog{will-change:auto}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar"><div class="brand"><div class="logo">⌘</div><div><h1>DevPocket</h1><p>Developer tools, always within reach</p></div></div><div style="display:flex;align-items:center;gap:8px"><button id="themeToggle" class="viewpill" type="button" aria-label="Toggle light theme" title="Toggle theme">☼</button><div class="pill">● Offline-ready</div></div></header>
+<section class="hero"><div class="eyebrow">Your pocket toolbox</div><h2>Build faster.<br><span style="color:#a69cff">Stay in flow.</span></h2><p>A clean collection of everyday developer utilities. No account, no clutter — your inputs stay on this device.</p></section>
+<div class="searchwrap"><span class="searchicon">⌕</span><input id="search" class="search" placeholder="Search tools…  ( / )" autocomplete="off" aria-label="Search developer tools"><button id="clearSearch" class="searchclear" type="button" aria-label="Clear search" title="Clear search">×</button></div>
+<nav class="categories" id="categories"><button class="active" data-cat="All">All tools</button><button data-cat="Format">Format</button><button data-cat="Encode">Encode</button><button data-cat="Generate">Generate</button><button data-cat="Design">Design</button><button data-cat="Text">Text</button><button data-cat="Convert">Convert</button><button data-cat="Security">Security</button><button data-cat="Web">Web</button><button data-cat="Utility">Utility</button></nav>
+<div class="sectiontitle"><strong id="count">150 tools</strong><button class="viewpill" id="favFilter" type="button">☆ Favorites</button><div class="toolbar-options"><select id="sortTools" aria-label="Sort tools"><option value="default">Default order</option><option value="az">Name A–Z</option><option value="za">Name Z–A</option><option value="recent">Recently used</option></select></div><span>Tap a tool to open</span></div><main class="grid" id="grid"></main>
+<footer class="footer">
+  <section class="donate-card" aria-labelledby="donateTitle">
+    <div class="donate-mark" aria-hidden="true">♥</div>
+    <div class="donate-copy">
+      <span class="donate-kicker">SUPPORT THE PROJECT</span>
+      <h2 id="donateTitle">Liked DevPocket?</h2>
+      <p>If these tools made your workflow easier, you can support future improvements with a small voluntary donation. Every bit helps with maintenance, new tools and polish. No pressure—using DevPocket for free is always welcome.</p>
+      <div class="upi-row"><span class="upi-label">UPI ID</span><code id="upiId">pixelhere@axl</code><button class="donate-copy-btn" id="copyUpi" type="button" aria-label="Copy UPI ID pixelhere@axl" aria-live="polite">⧉ Copy UPI</button></div>
+      <a class="donate-btn" href="upi://pay?pa=pixelhere%40axl&amp;pn=Nova%20Slayer&amp;cu=INR&amp;tn=Support%20DevPocket" aria-label="Donate to DevPocket using UPI">Donate with UPI <span aria-hidden="true">↗</span></a>
+      <p class="donate-note">UPI app availability depends on your device. Verify the recipient and amount in your payment app before confirming.</p>
+    </div>
+  </section>
+  <section class="contact-card" aria-labelledby="contactTitle">
+    <div class="contact-heading"><span class="contact-icon" aria-hidden="true">✉</span><div><span class="donate-kicker">CONNECT & FEEDBACK</span><h3 id="contactTitle">Get in touch</h3></div></div>
+    <p>Found a bug, have a suggestion, or want to share an idea for a new tool? Reach out or join the community.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:chandansharma35831@gmail.com"><span aria-hidden="true">✉</span><span><small>Email</small><strong>chandansharma35831@gmail.com</strong></span><span class="contact-arrow" aria-hidden="true">↗</span></a>
+      <a class="contact-link" href="https://discord.gg/VTU9XYJeqR" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span><span><small>Discord Community</small><strong>Join Nova Slayer Server</strong></span><span class="contact-arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+  <div class="about-grid">
+    <div><strong>Offline-first</strong><span>Most tools run locally in your browser. No account required.</span></div>
+    <div><strong>Privacy-minded</strong><span>Your inputs stay on this device unless you choose to share them.</span></div>
+    <div><strong>Built for developers</strong><span>150 handy utilities for formatting, encoding, generating and debugging.</span></div>
+  </div>
+  <div class="ns-maker" aria-label="Made by Nova Slayer, Chandan Kumar">
+    <div class="ns-emblem" aria-hidden="true"><span>N</span><i></i></div>
+    <div class="ns-maker-copy"><span class="ns-overline">CRAFTED WITH PURPOSE</span><div class="ns-made">MADE BY <strong>NOVA <em>SLAYER</em></strong></div><span class="ns-creator">CHANDAN KUMAR <b>·</b> CREATOR</span></div>
+    <div class="ns-signature" aria-hidden="true">NS<span>✦</span></div>
+  </div>
+  <span class="sub">DEVPOCKET <i class="ns-dot">✦</i> LOCAL-FIRST DEVELOPER TOOLKIT</span>
+  <span class="sub">Have feedback or a tool idea? Share it with the Nova Slayer community.</span>
+</footer>
+</div>
+<div class="modal" id="modal"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1"><div class="dialoghead"><h2 id="modalTitle">Tool</h2><button class="close" id="close" aria-label="Close">×</button></div><div id="toolBody"></div></section></div><div class="toast" id="toast"></div>
+<script>
+(()=>{'use strict';
+const tools=[
+{id:'json',name:'JSON Formatter',desc:'Format, validate and minify JSON data.',cat:'Format',icon:'{}',tag:'Format'},
+{id:'base64',name:'Base64 Converter',desc:'Encode text to Base64 or decode it back.',cat:'Encode',icon:'⇄',tag:'Encode'},
+{id:'url',name:'URL Encoder',desc:'Encode or decode URL components safely.',cat:'Encode',icon:'↗',tag:'Encode'},
+{id:'uuid',name:'UUID Generator',desc:'Generate random UUID v4 identifiers.',cat:'Generate',icon:'◇',tag:'Generate'},
+{id:'password',name:'Password Generator',desc:'Create strong passwords with custom rules.',cat:'Generate',icon:'⚿',tag:'Generate'},
+{id:'color',name:'Color Picker',desc:'Pick a color and copy HEX, RGB or HSL.',cat:'Design',icon:'◉',tag:'Design'},
+{id:'jwt',name:'JWT Decoder',desc:'Inspect token header and payload locally.',cat:'Encode',icon:'◈',tag:'Decode'},
+{id:'text',name:'Text Utilities',desc:'Count words, characters and lines; transform text.',cat:'Text',icon:'Aa',tag:'Text'},
+{id:'timestamp',name:'Unix Timestamp',desc:'Convert Unix timestamps and date/time.',cat:'Format',icon:'◷',tag:'Time'},
+{id:'regex',name:'Regex Tester',desc:'Test a pattern against sample text.',cat:'Format',icon:'.*',tag:'Test'},
+{id:'html',name:'HTML Entity Tool',desc:'Escape or decode HTML special characters.',cat:'Web',icon:'</>',tag:'Web'},
+{id:'hash',name:'Hash Generator',desc:'Generate SHA-1, SHA-256 and SHA-512 hashes.',cat:'Security',icon:'#',tag:'Security'},
+{id:'csvjson',name:'CSV ⇄ JSON',desc:'Convert CSV rows into JSON or JSON arrays into CSV.',cat:'Convert',icon:'⇄',tag:'Convert'},
+{id:'markdown',name:'Markdown Preview',desc:'Preview basic Markdown locally with safe rendering.',cat:'Web',icon:'M↓',tag:'Preview'},
+{id:'calc',name:'Developer Calculator',desc:'Evaluate basic math expressions and conversions.',cat:'Format',icon:'∑',tag:'Utility'},
+{id:'lorem',name:'Lorem Ipsum',desc:'Generate placeholder text in words or paragraphs.',cat:'Generate',icon:'¶',tag:'Generate'},
+{id:'case',name:'Case Converter',desc:'Switch camelCase, snake_case, kebab-case and PascalCase.',cat:'Text',icon:'Aa',tag:'Text'},
+{id:'slug',name:'Slug Generator',desc:'Create clean URL slugs from titles.',cat:'Text',icon:'↘',tag:'Text'},
+{id:'dedupe',name:'Duplicate Line Remover',desc:'Remove repeated lines and optionally sort them.',cat:'Text',icon:'≋',tag:'Clean'},
+{id:'json-ts',name:'JSON to TypeScript',desc:'Infer a TypeScript interface from JSON.',cat:'Convert',icon:'TS',tag:'Convert'},
+{id:'query',name:'Query String Parser',desc:'Parse URL query parameters into JSON.',cat:'Web',icon:'?',tag:'Web'},
+{id:'diff',name:'Text Diff',desc:'Compare two text blocks line by line.',cat:'Text',icon:'±',tag:'Compare'},
+{id:'htmlmin',name:'HTML Minifier',desc:'Compact HTML markup by removing comments and whitespace.',cat:'Web',icon:'</>',tag:'Web'},
+{id:'cssmin',name:'CSS Minifier',desc:'Minify CSS while preserving quoted strings.',cat:'Web',icon:'#',tag:'Web'},
+{id:'numberbase',name:'Number Base Converter',desc:'Convert binary, decimal, hexadecimal and octal.',cat:'Convert',icon:'01',tag:'Convert'},
+{id:'timer',name:'Focus Timer',desc:'A simple focus countdown with start, pause and reset.',cat:'Utility',icon:'◷',tag:'Utility'},
+{id:'xmlfmt',name:'XML Formatter',desc:'Format XML with indentation.',cat:'Format',icon:'⌘',tag:'Format'},
+{id:'bytes',name:'Byte Size Converter',desc:'Convert bytes into KB, MB, GB and more.',cat:'Convert',icon:'B',tag:'Convert'},
+{id:'contrast',name:'Color Contrast Checker',desc:'Check WCAG contrast ratio for two colors.',cat:'Design',icon:'◐',tag:'A11y'},
+{id:'gradient',name:'CSS Gradient Builder',desc:'Build a CSS linear gradient from color stops.',cat:'Design',icon:'◒',tag:'CSS'},
+{id:'aspect',name:'Aspect Ratio Calculator',desc:'Calculate width or height from a ratio.',cat:'Convert',icon:'▭',tag:'Utility'},
+{id:'sortlines',name:'Line Sorter',desc:'Sort lines ascending, descending or naturally.',cat:'Text',icon:'↕',tag:'Text'},
+{id:'escapejs',name:'Regex Escape',desc:'Escape special characters for regex patterns.',cat:'Text',icon:'.*',tag:'Text'},
+{id:'htmlpreview',name:'HTML Preview',desc:'Preview HTML in a sandboxed iframe.',cat:'Web',icon:'▣',tag:'Preview'},
+{id:'jsonpath',name:'JSON Path Lite',desc:'Get a value using a simple dot/bracket path.',cat:'Format',icon:'$.',tag:'JSON'},
+{id:'unixhuman',name:'Relative Time',desc:'Convert a date into a relative time phrase.',cat:'Convert',icon:'◷',tag:'Time'},
+{id:'cssfmt',name:'CSS Formatter',desc:'Indent and format CSS declarations.',cat:'Format',icon:'{}',tag:'CSS'},
+{id:'htmlfmt',name:'HTML Formatter',desc:'Indent HTML markup for easier reading.',cat:'Format',icon:'</>',tag:'HTML'},
+{id:'ipcalc',name:'IPv4 Subnet Calculator',desc:'Calculate network, broadcast and host range.',cat:'Convert',icon:'IP',tag:'Network'},
+{id:'urlinspect',name:'URL Inspector',desc:'Break a URL into its components.',cat:'Web',icon:'↗',tag:'Web'},
+{id:'datauri',name:'Data URI Builder',desc:'Encode text as a Base64 data URI.',cat:'Encode',icon:'⇧',tag:'Encode'},
+{id:'jsonsample',name:'JSON Sample Generator',desc:'Generate sample JSON from a simple schema.',cat:'Generate',icon:'{}',tag:'JSON'},
+{id:'cssunits',name:'CSS Unit Converter',desc:'Convert px, rem and em using a base size.',cat:'Convert',icon:'↔',tag:'CSS'},
+{id:'epochbatch',name:'Timestamp Batch Converter',desc:'Convert a list of Unix timestamps at once.',cat:'Convert',icon:'◷',tag:'Time'},
+{id:'jsondiff',name:'JSON Diff',desc:'Compare two JSON values and show changed paths.',cat:'Format',icon:'±',tag:'JSON'},
+{id:'htmlentities',name:'HTML Entity Encoder',desc:'Encode or decode named and numeric HTML entities.',cat:'Web',icon:'&lt;',tag:'HTML'},
+{id:'querybuild',name:'URL Query Builder',desc:'Build query strings from key/value pairs.',cat:'Web',icon:'?=',tag:'URL'},
+{id:'hexbin',name:'Hex ⇄ Binary',desc:'Convert hexadecimal bytes and binary strings.',cat:'Convert',icon:'01',tag:'Convert'},
+{id:'base32',name:'Base32 Encoder',desc:'Encode/decode text with Base32 alphabet.',cat:'Encode',icon:'32',tag:'Encode'},
+{id:'semver',name:'Semantic Version Compare',desc:'Compare two semantic version strings.',cat:'Convert',icon:'v×',tag:'Version'},
+{id:'cron',name:'Cron Expression Helper',desc:'Parse common five-field cron expressions.',cat:'Convert',icon:'◷',tag:'Cron'},
+{id:'cssspec',name:'CSS Specificity Calculator',desc:'Calculate specificity for a CSS selector.',cat:'Web',icon:'#',tag:'CSS'},
+{id:'metahtml',name:'HTML Meta Generator',desc:'Generate common SEO and viewport meta tags.',cat:'Web',icon:'⌘',tag:'HTML'},
+{id:'loremwords',name:'Word Counter Pro',desc:'Count words, sentences, paragraphs and reading time.',cat:'Text',icon:'Aa',tag:'Text'},
+{id:'jsonflatten',name:'JSON Flattener',desc:'Flatten nested JSON objects into dotted paths.',cat:'Format',icon:'⇣',tag:'JSON'},
+{id:'hexcolor',name:'HEX / RGB Converter',desc:'Convert HEX and RGB color values.',cat:'Design',icon:'◉',tag:'Color'},
+{id:'csp',name:'CSP Header Builder',desc:'Compose a Content-Security-Policy header.',cat:'Security',icon:'盾',tag:'Security'},
+{id:'curlparse',name:'cURL Command Inspector',desc:'Extract URL, method and headers from common cURL commands.',cat:'Web',icon:'>_',tag:'API'},
+{id:'htmlmeta',name:'Open Graph Preview Tags',desc:'Generate Open Graph and social metadata markup.',cat:'Web',icon:'◎',tag:'SEO'},
+{id:'jsonvalidate',name:'JSON Validator',desc:'Validate JSON and report parse errors.',cat:'Format',icon:'{}',tag:'Validate'},
+{id:'jsonescape',name:'JSON String Escape',desc:'Escape text for safe JSON string values.',cat:'Encode',icon:'\"',tag:'Encode'},
+{id:'jsonunescape',name:'JSON String Unescape',desc:'Decode escaped JSON string content.',cat:'Encode',icon:'↩',tag:'Decode'},
+{id:'jsonpointer',name:'JSON Pointer Lookup',desc:'Read a value using RFC 6901 JSON Pointer.',cat:'Format',icon:'↗',tag:'JSON'},
+{id:'jsonkeys',name:'JSON Key Extractor',desc:'List nested JSON paths and value types.',cat:'Format',icon:'🔑',tag:'JSON'},
+{id:'jsonarray',name:'JSON Array Utilities',desc:'Sort, unique, reverse or chunk a JSON array.',cat:'Convert',icon:'[]',tag:'Array'},
+{id:'jsonschema',name:'JSON Schema Starter',desc:'Generate a basic JSON Schema from sample JSON.',cat:'Generate',icon:'◇',tag:'Schema'},
+{id:'yamljson',name:'YAML ⇄ JSON Lite',desc:'Convert a simple YAML subset to JSON.',cat:'Convert',icon:'Y⇄J',tag:'Convert'},
+{id:'xmlvalidate',name:'XML Well-formedness Check',desc:'Check XML parsing and show parser errors.',cat:'Format',icon:'XML',tag:'Validate'},
+{id:'htmlstrip',name:'HTML Tag Stripper',desc:'Extract readable text from HTML markup.',cat:'Web',icon:'T',tag:'HTML'},
+{id:'htmlattrs',name:'HTML Attribute Inspector',desc:'List tags and attributes from an HTML snippet.',cat:'Web',icon:'<>',tag:'Inspect'},
+{id:'cssselector',name:'CSS Selector Escape',desc:'Escape a string for use in a CSS selector.',cat:'Encode',icon:'#',tag:'CSS'},
+{id:'cssvars',name:'CSS Variable Extractor',desc:'Extract custom properties from CSS.',cat:'Web',icon:'--',tag:'CSS'},
+{id:'cssprefix',name:'CSS Prefix Helper',desc:'Add common vendor prefixes to selected properties.',cat:'Web',icon:'↔',tag:'CSS'},
+{id:'cssclamp',name:'CSS Clamp Generator',desc:'Generate fluid clamp() values from min/max sizes.',cat:'Design',icon:'↗',tag:'CSS'},
+{id:'jsescape',name:'JavaScript String Escape',desc:'Escape text for a JavaScript string literal.',cat:'Encode',icon:'JS',tag:'Encode'},
+{id:'jsunescape',name:'JavaScript String Unescape',desc:'Decode common JavaScript escape sequences.',cat:'Encode',icon:'↩',tag:'Decode'},
+{id:'jsobj',name:'Object to Query Params',desc:'Convert a JSON object to URL query parameters.',cat:'Web',icon:'{}',tag:'URL'},
+{id:'queryjson',name:'Query Params to JSON',desc:'Convert a query string into JSON.',cat:'Web',icon:'?{}',tag:'URL'},
+{id:'urlresolve',name:'Relative URL Resolver',desc:'Resolve a relative path against a base URL.',cat:'Web',icon:'↗',tag:'URL'},
+{id:'urlnormalize',name:'URL Normalizer',desc:'Normalize URL scheme, host and path.',cat:'Web',icon:'◎',tag:'URL'},
+{id:'emailcheck',name:'Email Format Checker',desc:'Check common email syntax locally.',cat:'Security',icon:'@',tag:'Check'},
+{id:'ipprivate',name:'IP Address Classifier',desc:'Classify IPv4 private, loopback and special ranges.',cat:'Security',icon:'IP',tag:'Network'},
+{id:'macformat',name:'MAC Address Formatter',desc:'Normalize and validate MAC addresses.',cat:'Convert',icon:'▦',tag:'Network'},
+{id:'portcheck',name:'Port Number Validator',desc:'Validate TCP/UDP port numbers and ranges.',cat:'Security',icon:'⇄',tag:'Network'},
+{id:'chmod',name:'Unix Permission Converter',desc:'Convert octal permissions to symbolic form.',cat:'Convert',icon:'⌁',tag:'Unix'},
+{id:'byteshex',name:'Byte Array Converter',desc:'Convert hex bytes to decimal and back.',cat:'Convert',icon:'B',tag:'Bytes'},
+{id:'ascii',name:'ASCII Table Lookup',desc:'Convert text to ASCII/Unicode code points.',cat:'Convert',icon:'A',tag:'Text'},
+{id:'unicode',name:'Unicode Inspector',desc:'Inspect code points and Unicode names where available.',cat:'Text',icon:'Ω',tag:'Unicode'},
+{id:'textwrap',name:'Text Wrap Tool',desc:'Wrap text to a chosen column width.',cat:'Text',icon:'↵',tag:'Text'},
+{id:'textreverse',name:'Text Reverser',desc:'Reverse text by characters or lines.',cat:'Text',icon:'⇄',tag:'Text'},
+{id:'lineprefix',name:'Line Prefix/Suffix',desc:'Add prefix and suffix to each line.',cat:'Text',icon:'≡',tag:'Text'},
+{id:'extractemails',name:'Email Extractor',desc:'Extract unique email-like strings from text.',cat:'Text',icon:'@',tag:'Extract'},
+{id:'extracturls',name:'URL Extractor',desc:'Extract unique HTTP/HTTPS URLs from text.',cat:'Text',icon:'↗',tag:'Extract'},
+{id:'numberwords',name:'Number Formatter',desc:'Format numbers with grouping and precision.',cat:'Convert',icon:'123',tag:'Number'},
+{id:'randomdata',name:'Random Data Generator',desc:'Generate random integers, hex strings or names.',cat:'Generate',icon:'⚄',tag:'Random'},
+{id:'mime',name:'MIME Type Lookup',desc:'Look up common file extensions and MIME types.',cat:'Web',icon:'MIME',tag:'Lookup'},
+{id:'httpstatus',name:'HTTP Status Reference',desc:'Explain common HTTP status codes.',cat:'Web',icon:'HTTP',tag:'Reference'},
+{id:'htmlencodeurl',name:'URL Component Batch Encoder',desc:'Encode/decode each line as a URL component.',cat:'Encode',icon:'↗',tag:'Batch'}
+,
+{id:'jsonsort',name:'JSON Key Sorter',desc:'Sort object keys recursively',cat:'Format',icon:'↕',tag:'JSON'},
+{id:'jsonmerge',name:'JSON Merge Tool',desc:'Deep merge two JSON objects',cat:'Format',icon:'⊕',tag:'JSON'},
+{id:'sqlfmt',name:'SQL Formatter',desc:'Format common SQL statements',cat:'Format',icon:'SQL',tag:'SQL'},
+{id:'htmlbeaut',name:'HTML Beautifier',desc:'Indent HTML markup',cat:'Format',icon:'<>',tag:'HTML'},
+{id:'cssbeaut',name:'CSS Beautifier',desc:'Expand compact CSS',cat:'Format',icon:'{}',tag:'CSS'},
+{id:'jsmin',name:'JavaScript Minifier Lite',desc:'Basic comment and whitespace minifier',cat:'Format',icon:'JS',tag:'JS'},
+{id:'svgopt',name:'SVG Optimizer Lite',desc:'Remove SVG comments and extra whitespace',cat:'Web',icon:'◇',tag:'SVG'},
+{id:'palette',name:'Color Palette Generator',desc:'Generate a six-color palette',cat:'Design',icon:'◉',tag:'Color'},
+{id:'regexescape',name:'Regex Escape Helper',desc:'Escape literal text for regex',cat:'Text',icon:'.*',tag:'Regex'},
+{id:'timestampiso',name:'ISO Date Converter',desc:'Convert ISO dates and Unix timestamps',cat:'Convert',icon:'◷',tag:'Time'},
+{id:'gitignore',name:'Gitignore Generator',desc:'Starter ignore rules by stack',cat:'Web',icon:'Git',tag:'Git'},
+{id:'dockercompose',name:'Docker Compose Starter',desc:'Create a basic compose YAML template',cat:'Web',icon:'▣',tag:'DevOps'},
+{id:'nginx',name:'Nginx Config Starter',desc:'Basic reverse proxy server block',cat:'Web',icon:'N',tag:'DevOps'},
+{id:'envformat',name:'ENV Formatter',desc:'Sort KEY=VALUE lines',cat:'Text',icon:'ENV',tag:'Config'},
+{id:'mdtable',name:'Markdown Table Builder',desc:'Convert comma-separated rows to Markdown table',cat:'Text',icon:'▤',tag:'Markdown'},
+{id:'yamlindent',name:'YAML Indent Checker',desc:'Check indentation consistency in YAML-like text',cat:'Format',icon:'Y',tag:'YAML'},
+{id:'jsonrepair',name:'JSON Repair Helper',desc:'Fix common trailing-comma JSON mistakes',cat:'Format',icon:'{}',tag:'JSON'},
+{id:'json2csv',name:'JSON to CSV',desc:'Convert an array of objects to CSV',cat:'Convert',icon:'⇄',tag:'CSV'},
+{id:'csv2json',name:'CSV to JSON Lite',desc:'Convert CSV with quoted-field support',cat:'Convert',icon:'⇄',tag:'CSV'},
+{id:'json2yaml',name:'JSON to YAML Lite',desc:'Convert basic JSON objects and arrays to YAML',cat:'Convert',icon:'⇣',tag:'YAML'},
+{id:'yaml2json',name:'YAML to JSON Lite',desc:'Convert a basic YAML subset to JSON',cat:'Convert',icon:'⇡',tag:'YAML'},
+{id:'xmljson',name:'XML to JSON Lite',desc:'Convert simple XML structures to JSON',cat:'Convert',icon:'<>',tag:'XML'},
+{id:'htmltext',name:'HTML to Text',desc:'Strip markup and extract readable text',cat:'Web',icon:'Aa',tag:'HTML'},
+{id:'cssvarsextract',name:'CSS Variables Extractor',desc:'Extract custom properties from CSS',cat:'Web',icon:'--',tag:'CSS'},
+{id:'csscolor',name:'CSS Color Extractor',desc:'Find unique color literals in CSS or text',cat:'Design',icon:'◉',tag:'Color'},
+{id:'cssshadow',name:'Box Shadow Builder',desc:'Build a CSS box-shadow declaration',cat:'Design',icon:'▧',tag:'CSS'},
+{id:'cssclampgen',name:'Fluid Clamp Generator',desc:'Generate responsive CSS clamp() values',cat:'Design',icon:'↔',tag:'CSS'},
+{id:'svgviewbox',name:'SVG ViewBox Calculator',desc:'Calculate viewBox from width and height',cat:'Web',icon:'◇',tag:'SVG'},
+{id:'htmllinkcheck',name:'HTML Link Extractor',desc:'Extract href and src links from markup',cat:'Web',icon:'↗',tag:'HTML'},
+{id:'robots',name:'Robots.txt Generator',desc:'Generate a basic robots.txt file',cat:'Web',icon:'🤖',tag:'SEO'},
+{id:'sitemap',name:'Sitemap XML Generator',desc:'Create sitemap entries from URL lines',cat:'Web',icon:'⌘',tag:'SEO'},
+{id:'htaccess',name:'Apache Redirect Builder',desc:'Generate common .htaccess redirects',cat:'Web',icon:'↪',tag:'Web'},
+{id:'fetchsnippet',name:'Fetch API Snippet',desc:'Generate a fetch() request example',cat:'Web',icon:'JS',tag:'API'},
+{id:'curlbuilder',name:'cURL Builder',desc:'Build a cURL command from method and URL',cat:'Web',icon:'>_',tag:'API'},
+{id:'httpheaders',name:'HTTP Header Inspector',desc:'Parse raw HTTP headers into JSON',cat:'Web',icon:'⇅',tag:'HTTP'},
+{id:'statuscode',name:'HTTP Status Lookup',desc:'Lookup common HTTP status meanings',cat:'Web',icon:'HTTP',tag:'Reference'},
+{id:'jwtgen',name:'JWT Structure Builder',desc:'Create an unsigned JWT-shaped token for testing',cat:'Security',icon:'◈',tag:'JWT'},
+{id:'bcryptcost',name:'Hash Cost Estimator',desc:'Explain common password-hash cost settings',cat:'Security',icon:'#',tag:'Security'},
+{id:'sha256filehint',name:'Integrity Check Guide',desc:'Generate file-integrity command examples',cat:'Security',icon:'✓',tag:'Security'},
+{id:'regexbuilder',name:'Regex Pattern Cookbook',desc:'Generate common regex patterns',cat:'Text',icon:'.*',tag:'Regex'},
+{id:'textdiffhtml',name:'HTML Diff View',desc:'Render a safe side-by-side text comparison',cat:'Text',icon:'±',tag:'Compare'},
+{id:'markdownlint',name:'Markdown Checklist',desc:'Check common Markdown formatting issues',cat:'Text',icon:'M↓',tag:'Markdown'},
+{id:'readme',name:'README Starter',desc:'Generate a project README template',cat:'Generate',icon:'¶',tag:'Docs'},
+{id:'license',name:'License Notice Helper',desc:'Generate a license notice header template',cat:'Generate',icon:'©',tag:'Docs'},
+{id:'gitbranch',name:'Git Branch Name Helper',desc:'Normalize text into a branch name',cat:'Text',icon:'Git',tag:'Git'},
+{id:'commitmsg',name:'Commit Message Helper',desc:'Format a conventional commit message',cat:'Generate',icon:'✓',tag:'Git'},
+{id:'semverbump',name:'SemVer Bump Calculator',desc:'Calculate patch, minor or major version bump',cat:'Convert',icon:'v+',tag:'Version'},
+{id:'uuidparse',name:'UUID Inspector',desc:'Validate UUID format and inspect version bits',cat:'Security',icon:'◇',tag:'UUID'},
+{id:'urlquerysort',name:'Query Parameter Sorter',desc:'Sort URL query parameters alphabetically',cat:'Web',icon:'?',tag:'URL'},
+{id:'htmlform',name:'HTML Form Generator',desc:'Generate accessible form markup from fields',cat:'Web',icon:'▤',tag:'HTML'},
+{id:'svgicon',name:'SVG Icon Starter',desc:'Generate a minimal accessible SVG icon template',cat:'Generate',icon:'◇',tag:'SVG'},
+{id:'dockerfile',name:'Dockerfile Starter',desc:'Generate a basic Dockerfile for common runtimes',cat:'Web',icon:'▣',tag:'DevOps'}];
+document.querySelectorAll('#categories button').forEach(b=>{let cat=b.dataset.cat,n=cat==='All'?tools.length:tools.filter(t=>t.cat===cat).length;let badge=document.createElement('span');badge.className='catcount';badge.textContent=n;b.appendChild(badge);b.setAttribute('aria-label',`${cat==='All'?'All tools':cat}: ${n} tools`)});
+const $=s=>document.querySelector(s), grid=$('#grid'), modal=$('#modal'), body=$('#toolBody');
+function safeRead(key,fallback){try{const raw=localStorage.getItem(key);return raw===null?fallback:JSON.parse(raw)}catch(e){return fallback}}
+function safeWrite(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){return false}}
+let category='All';
+let favoritesValue=safeRead('devpocket-favs',[]);let favorites=new Set(Array.isArray(favoritesValue)?favoritesValue.filter(x=>typeof x==='string'):[]);
+let recentValue=safeRead('devpocket-recent',[]);let recent=Array.isArray(recentValue)?recentValue.filter(x=>typeof x==='string').slice(0,30):[];
+let sortMode='default';let onlyFav=false;
+function secureRandomIndex(max){if(!Number.isInteger(max)||max<1||max>0x100000000)throw Error('Invalid random range');if(!crypto||typeof crypto.getRandomValues!=='function')throw Error('Secure random generator is unavailable in this browser');const limit=Math.floor(0x100000000/max)*max;let n;do{n=crypto.getRandomValues(new Uint32Array(1))[0]}while(n>=limit);return n%max}
+function createUuid(){if(typeof crypto!=='undefined'&&typeof crypto.randomUUID==='function')return crypto.randomUUID();if(typeof crypto==='undefined'||typeof crypto.getRandomValues!=='function')throw Error('Secure UUID generation is not supported in this browser');const b=crypto.getRandomValues(new Uint8Array(16));b[6]=(b[6]&15)|64;b[8]=(b[8]&63)|128;const h=[...b].map(v=>v.toString(16).padStart(2,'0')).join('');return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`}
+function toolHue(name){let h=0;for(let i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))%360;return h}function render(){let q=$('#search').value.trim().toLowerCase();let list=tools.filter(t=>(category==='All'||t.cat===category)&&(!onlyFav||favorites.has(t.id))&&(`${t.name} ${t.desc} ${t.cat}`.toLowerCase().includes(q)));if(sortMode==='az')list.sort((a,b)=>a.name.localeCompare(b.name));else if(sortMode==='za')list.sort((a,b)=>b.name.localeCompare(a.name));else if(sortMode==='recent')list.sort((a,b)=>{let ai=recent.indexOf(a.id),bi=recent.indexOf(b.id);return (ai<0?9999:ai)-(bi<0?9999:bi)});$('#count').textContent=`${list.length} tool${list.length===1?'':'s'}`;grid.innerHTML=list.length?list.map((t,i)=>`<div class="toolcard" role="button" tabindex="0" data-tool="${t.id}" style="--tool-h:${toolHue(t.name)};animation-delay:${Math.min(i*3,36)}ms"><button class="fav ${favorites.has(t.id)?'on':''}" data-fav="${t.id}" aria-label="Toggle favorite">${favorites.has(t.id)?'★':'☆'}</button><span class="toolicon">${t.icon}</span><h3>${t.name}</h3><p>${t.desc}</p><span class="tag">${t.tag}</span></div>`).join(''):'<div class="empty">No tools match your search.</div>';grid.querySelectorAll('[data-tool]').forEach(b=>{b.addEventListener('click',e=>{if(e.target.closest('[data-fav]'))return;openTool(b.dataset.tool)});b.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===b){e.preventDefault();openTool(b.dataset.tool)}})});grid.querySelectorAll('[data-fav]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();let id=b.dataset.fav;favorites.has(id)?favorites.delete(id):favorites.add(id);safeWrite('devpocket-favs',[...favorites]);render();toast(favorites.has(id)?'Added to favorites':'Removed from favorites')}))}
+$('#favFilter').addEventListener('click',()=>{onlyFav=!onlyFav;$('#favFilter').classList.toggle('active',onlyFav);$('#favFilter').textContent=onlyFav?'★ Favorites':'☆ Favorites';render()});$('#categories').addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;category=b.dataset.cat;$('#categories').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));render()});$('#search').addEventListener('input',render);$('#clearSearch').addEventListener('click',()=>{$('#search').value='';render();$('#search').focus()});$('#sortTools').addEventListener('change',e=>{sortMode=e.target.value;render()});$('#themeToggle').addEventListener('click',()=>{document.body.classList.toggle('light');let light=document.body.classList.contains('light');safeWrite('devpocket-light',light);$('#themeToggle').textContent=light?'☾':'☼';$('#themeToggle').setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme')});if(safeRead('devpocket-light',false)){document.body.classList.add('light');$('#themeToggle').textContent='☾'}
+function toast(msg){let el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),1800)}
+async function copy(text){try{if(navigator.clipboard&&typeof navigator.clipboard.writeText==='function'){await navigator.clipboard.writeText(text);toast('Copied to clipboard');return}}catch(e){}let ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')===true}catch(e){ok=false}ta.remove();toast(ok?'Copied to clipboard':'Copy not available')}
+function field(label,id,placeholder='',value=''){return `<div class="field"><label for="${id}">${label}</label><textarea id="${id}" placeholder="${placeholder}">${value}</textarea></div>`}function input(label,id,value='',type='text'){return `<div class="field"><label for="${id}">${label}</label><input id="${id}" type="${type}" value="${value}"></div>`}function actions(items){return `<div class="actions">${items.map(x=>`<button class="btn ${x.primary?'primary':''}" id="${x.id}">${x.label}</button>`).join('')}</div>`}function result(id='result'){return `<div class="field"><label>Result</label><div class="result" id="${id}"></div></div>`}function setResult(s,id='result'){const el=$('#'+id);if(el)el.textContent=s}
+function disposeActiveTool(){if(typeof window.__devPocketCleanup==='function'){try{window.__devPocketCleanup()}catch(e){console.warn('Tool cleanup failed:',e)}window.__devPocketCleanup=null}}
+function closeModal(){let returnId=window.__dpReturnFocus?.dataset?.tool;disposeActiveTool();modal.classList.remove('open');if(sortMode==='recent')render();let target=returnId?grid.querySelector(`[data-tool=\"${returnId}\"]`):window.__dpReturnFocus;if(target&&target.isConnected)target.focus();window.__dpReturnFocus=null}
+function openTool(id){let t=tools.find(x=>x.id===id);if(!t)return;disposeActiveTool();window.__dpReturnFocus=document.activeElement;recent=[id,...recent.filter(x=>x!==id)].slice(0,30);safeWrite('devpocket-recent',recent);$('#modalTitle').textContent=t.name;$('.dialog').style.setProperty('--tool-h',toolHue(t.name));let html='';
+if(id==='json'){html=field('JSON input','src','Paste JSON here…')+actions([{id:'format',label:'Format JSON',primary:true},{id:'minify',label:'Minify'},{id:'validate',label:'Validate'}])+result();}
+if(id==='base64'){html=field('Text input','src','Enter text…')+actions([{id:'enc',label:'Encode',primary:true},{id:'dec',label:'Decode'}])+result();}
+if(id==='url'){html=field('Text or URL','src','Enter text or URL…')+actions([{id:'enc',label:'Encode',primary:true},{id:'dec',label:'Decode'}])+result();}
+if(id==='uuid'){html=`<div class="note">Generate RFC 4122 version 4 UUIDs using the browser's cryptographic random generator.</div>`+input('Quantity (1–50)','qty','5','number')+actions([{id:'generate',label:'Generate UUIDs',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='password'){html=`<div class="split">${input('Length (8–128)','len','20','number')}${input('Quantity (1–20)','qty','1','number')}</div><div class="actions"><label class="note"><input type="checkbox" id="upper" checked> Uppercase</label><label class="note"><input type="checkbox" id="lower" checked> Lowercase</label><label class="note"><input type="checkbox" id="nums" checked> Numbers</label><label class="note"><input type="checkbox" id="symbols" checked> Symbols</label></div>`+actions([{id:'generate',label:'Generate passwords',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='color'){html=`<div class="colorrow"><input id="picker" type="color" value="#8b7cff"><div style="flex:1">${input('HEX','hex','#8b7cff')}</div></div>`+result('rgb')+result('hsl')+actions([{id:'copyhex',label:'Copy HEX',primary:true},{id:'copyrgb',label:'Copy RGB'},{id:'copyhsl',label:'Copy HSL'}]);}
+if(id==='jwt'){html=field('JWT token','src','Paste token (header.payload.signature)…')+actions([{id:'decode',label:'Decode token',primary:true},{id:'clear',label:'Clear'}])+`<div class="field"><label>Header</label><div class="result" id="header"></div></div><div class="field"><label>Payload</label><div class="result" id="payload"></div></div><p class="note">This only decodes the token. It does not verify the signature or validate claims.</p>`;}
+if(id==='text'){html=field('Text input','src','Type or paste text…')+actions([{id:'upper',label:'UPPERCASE'},{id:'lower',label:'lowercase'},{id:'title',label:'Title Case'},{id:'trim',label:'Trim lines'},{id:'copy',label:'Copy text'}])+`<div class="split"><div class="result" id="stats">Words: 0\nCharacters: 0\nLines: 0</div><div class="result" id="out" style="min-height:80px"></div></div>`;}
+if(id==='timestamp'){html=input('Unix timestamp (seconds or milliseconds)','ts',String(Date.now()),'text')+actions([{id:'convert',label:'Convert timestamp',primary:true},{id:'now',label:'Use current time'}])+result()+input('Date/time (ISO or local)','date',new Date().toISOString(),'text')+actions([{id:'todate',label:'Convert date to timestamp'}])+`<div class="note">Timestamp is interpreted as seconds when 10 digits, otherwise milliseconds.</div>`;}
+if(id==='regex'){html=input('Regular expression','pattern','\\bdev\\w*')+`<div class="field"><label>Flags</label><input id="flags" value="gi" maxlength="6"></div>`+field('Test text','src','Enter sample text…')+actions([{id:'test',label:'Test pattern',primary:true},{id:'clear',label:'Clear'}])+result();}
+if(id==='html'){html=field('Input text / HTML','src','Enter text…')+actions([{id:'escape',label:'Escape HTML',primary:true},{id:'unescape',label:'Decode entities'},{id:'copy',label:'Copy result'}])+result();}
+if(id==='hash'){html=field('Text to hash','src','Enter text…')+`<div class="field"><label>Algorithm</label><select id="algo"><option>SHA-256</option><option>SHA-1</option><option>SHA-512</option></select></div>`+actions([{id:'hashgo',label:'Generate hash',primary:true},{id:'copy',label:'Copy result'}])+result()+`<p class="note">Uses Web Crypto when available (HTTPS/localhost/WebView secure context).</p>`;}
+if(id==='csvjson'){html=field('Input','src','CSV with headers or JSON array…')+actions([{id:'tojson',label:'CSV → JSON',primary:true},{id:'tocsv',label:'JSON → CSV'}])+result()+`<p class="note">CSV parser supports quoted fields and escaped quotes.</p>`;}
+if(id==='markdown'){html=field('Markdown','src','# Hello DevPocket\n\nWrite **bold**, *italic*, lists and inline code.')+actions([{id:'previewMd',label:'Preview',primary:true},{id:'copyhtml',label:'Copy HTML'}])+`<div class="field"><label>Preview</label><div class="result" id="preview" style="font-family:inherit;white-space:normal;min-height:120px"></div></div>`;}
+if(id==='calc'){html=input('Expression','expr','(12 * 8) / 3')+actions([{id:'calculate',label:'Calculate',primary:true},{id:'clear',label:'Clear'}])+result()+`<p class="note">Supports arithmetic, parentheses, %, and common Math functions (sin, cos, sqrt, pow, abs, round).</p>`;}
+if(id==='lorem'){html=`<div class="split">${input('Paragraphs','paras','3','number')}${input('Words per paragraph','words','60','number')}</div>`+actions([{id:'generate',label:'Generate text',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='case'){html=field('Input text','src','Enter words…')+actions([{id:'camel',label:'camelCase'},{id:'snake',label:'snake_case'},{id:'kebab',label:'kebab-case'},{id:'pascal',label:'PascalCase'},{id:'copy',label:'Copy result'}])+result();}
+if(id==='slug'){html=field('Text','src','A great title for your project…')+actions([{id:'sluggo',label:'Generate slug',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='dedupe'){html=field('Lines','src','Paste lines…')+`<label class="pill"><input id="sortlines" type="checkbox"> Sort alphabetically</label>`+actions([{id:'dedupego',label:'Remove duplicates',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='json-ts'){html=field('JSON','src','Paste JSON object…')+input('Interface name','typename','Root')+actions([{id:'tsgo',label:'Generate interface',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='query'){html=field('URL or query string','src','https://example.com/?name=dev&mode=fast')+actions([{id:'querygo',label:'Parse query',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='diff'){html=field('Original text','left','Original…')+field('Modified text','right','Modified…')+actions([{id:'diffgo',label:'Compare',primary:true}])+result();}
+if(id==='htmlmin'){html=field('HTML','src','Paste HTML…')+actions([{id:'minifygo',label:'Minify HTML',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='cssmin'){html=field('CSS','src','Paste CSS…')+actions([{id:'minifygo',label:'Minify CSS',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='numberbase'){html=input('Value','src','1010')+`<div class="field"><label>From base</label><select id="from"><option value="2">Binary</option><option value="8">Octal</option><option value="10" selected>Decimal</option><option value="16">Hexadecimal</option></select></div><div class="field"><label>To base</label><select id="to"><option value="2">Binary</option><option value="8">Octal</option><option value="10">Decimal</option><option value="16" selected>Hexadecimal</option></select></div>`+actions([{id:'convertgo',label:'Convert',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='timer'){html=`<div class="timerface" id="timerface">25:00</div><div class="field"><label>Minutes</label><input id="mins" type="number" min="1" max="180" value="25"></div>`+actions([{id:'start',label:'Start',primary:true},{id:'pause',label:'Pause'},{id:'reset',label:'Reset'}])+`<p class="note" id="timerstatus">Ready to focus</p>`;}
+ 
+if(id==='xmlfmt'){html=field('XML','src','Paste XML…')+actions([{id:'xmlgo',label:'Format XML',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='bytes'){html=input('Bytes','src','1048576','number')+actions([{id:'bytesgo',label:'Convert',primary:true}])+result();}
+if(id==='contrast'){html=`<div class="split">${input('Foreground HEX','fg','#ffffff')}${input('Background HEX','bg','#111827')}</div>`+actions([{id:'contrastgo',label:'Check contrast',primary:true}])+result();}
+if(id==='gradient'){html=`<div class="split">${input('Start color','c1','#b6ff4a')}${input('End color','c2','#a58bff')}</div>${input('Angle (deg)','angle','135','number')}`+actions([{id:'gradgo',label:'Generate gradient',primary:true},{id:'copy',label:'Copy result'}])+`<div id="gradpreview" style="height:90px;border-radius:18px;margin-top:12px"></div>`+result();}
+if(id==='aspect'){html=`<div class="split">${input('Width','w','1920','number')}${input('Height','h','1080','number')}</div>${input('New width (optional)','nw','1280','number')}`+actions([{id:'aspectgo',label:'Calculate',primary:true}])+result();}
+if(id==='sortlines'){html=field('Lines','src','Paste lines…')+`<div class="field"><label>Order</label><select id="order"><option value="asc">A → Z</option><option value="desc">Z → A</option><option value="num">Numeric</option></select></div>`+actions([{id:'sortgo',label:'Sort lines',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='escapejs'){html=field('Text','src','Enter regex pattern…')+actions([{id:'escgo',label:'Escape regex',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='htmlpreview'){html=field('HTML','src','<h1>Hello</h1><p>Preview locally</p>')+actions([{id:'previewgo',label:'Update preview',primary:true}])+`<iframe id="htmlframe" sandbox="" referrerpolicy="no-referrer" title="Sandboxed HTML preview" style="width:100%;height:240px;background:white;border:1px solid #30364d;border-radius:16px;margin-top:12px"></iframe>`;}
+if(id==='jsonpath'){html=field('JSON','src','{"user":{"name":"DevPocket"}}')+input('Path','path','user.name')+actions([{id:'pathgo',label:'Get value',primary:true}])+result();}
+if(id==='unixhuman'){html=input('Date / ISO time','date',new Date().toISOString())+actions([{id:'relativego',label:'Convert to relative time',primary:true}])+result();}
+if(id==='cssfmt'||id==='htmlfmt'||id==='sqlfmt'){html=field(id==='cssfmt'?'CSS':id==='htmlfmt'?'HTML':'SQL','src','Paste code…')+actions([{id:'formatgo',label:'Format',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='ipcalc'){html=input('IPv4 address with CIDR','src','192.168.1.10/24')+actions([{id:'ipgo',label:'Calculate subnet',primary:true}])+result();}
+if(id==='urlinspect'){html=input('URL','src','https://example.com/path?x=1#section')+actions([{id:'inspectgo',label:'Inspect URL',primary:true}])+result();}
+if(id==='mdtable'){html=field('Rows (first row is header)','src','Name,Value\nAlpha,1\nBeta,2')+actions([{id:'tablego',label:'Build table',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='datauri'){html=field('Text content','src','Hello DevPocket')+`<div class="field"><label>MIME type</label><select id="mime"><option>text/plain</option><option>text/html</option><option>application/json</option><option>text/css</option></select></div>`+actions([{id:'dataurigo',label:'Create data URI',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='jsonsample'){html=field('Simple schema JSON','src','{\n  "name": "string",\n  "active": "boolean",\n  "count": "number",\n  "tags": ["string"]\n}')+actions([{id:'samplego',label:'Generate sample',primary:true}])+result();}
+if(id==='cssunits'){html=`<div class="split">${input('Value','val','16','number')}${input('Root/base font size (px)','base','16','number')}</div>`+`<div class="field"><label>Convert from</label><select id="unitfrom"><option>px</option><option>rem</option><option>em</option></select></div><div class="field"><label>Convert to</label><select id="unitto"><option>rem</option><option>px</option><option>em</option></select></div>`+actions([{id:'unitsgo',label:'Convert',primary:true}])+result();}
+if(id==='epochbatch'){html=field('Unix timestamps (one per line)','src','1700000000\n1700000000000')+actions([{id:'epochgo',label:'Convert timestamps',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(id==='jsondiff'){html=field('Original JSON','left','{\"a\":1}')+field('Updated JSON','right','{\"a\":2}')+actions([{id:'jsondiffgo',label:'Compare JSON',primary:true},{id:'copy',label:'Copy result'}])+result();}
+if(['htmlentities','querybuild','hexbin','base32','semver','cron','cssspec','metahtml','loremwords','jsonflatten','hexcolor','csp','curlparse','htmlmeta','jsonvalidate','jsonescape','jsonunescape','jsonpointer','jsonkeys','jsonarray','jsonschema','yamljson','xmlvalidate','htmlstrip','htmlattrs','cssselector','cssvars','cssprefix','cssclamp','jsescape','jsunescape','jsobj','queryjson','urlresolve','urlnormalize','emailcheck','ipprivate','macformat','portcheck','chmod','byteshex','ascii','unicode','textwrap','textreverse','lineprefix','extractemails','extracturls','numberwords','randomdata','mime','httpstatus','htmlencodeurl'].includes(id)){html=field('Input','src','Enter or paste input…')+actions([{id:'runextra',label:'Run tool',primary:true},{id:'copy',label:'Copy result'}])+result()+`<p class=\"note\">Runs locally in your browser. Review generated output before using in production.</p>`;}
+if(['yamlindent','jsonrepair','json2csv','csv2json','json2yaml','yaml2json','xmljson','htmltext','cssvarsextract','csscolor','cssshadow','cssclampgen','svgviewbox','htmllinkcheck','robots','sitemap','htaccess','fetchsnippet','curlbuilder','httpheaders','statuscode','jwtgen','bcryptcost','sha256filehint','regexbuilder','textdiffhtml','markdownlint','readme','license','gitbranch','commitmsg','semverbump','uuidparse','urlquerysort','htmlform','svgicon','dockerfile'].includes(id)){html=field('Input','src','Paste or enter data…')+actions([{id:'runNew',label:'Run tool',primary:true},{id:'copy',label:'Copy result'},{id:'resetNew',label:'Reset'}])+result()+`<p class="note">Runs locally. Lite tools support common input formats; review output before production use.</p>`;}
+if(['jsonsort','jsonmerge','sqlfmt','htmlbeaut','cssbeaut','jsmin','svgopt','palette','regexescape','timestampiso','gitignore','dockercompose','nginx','envformat','mdtable'].includes(id)){html=field('Input','src','Paste or enter data…')+actions([{id:'runGeneric',label:'Run tool',primary:true},{id:'copy',label:'Copy result'},{id:'resetGeneric',label:'Reset'}])+result()+`<p class="note">Runs locally. Review output before production use.</p>`;}
+body.innerHTML=html;modal.classList.add('open');requestAnimationFrame(()=>{$('#close').focus();modal.classList.add('motion-ready')});bindTool(id)}
+function bindTool(id){const on=(el,fn)=>{let x=$('#'+el);if(x)x.addEventListener('click',fn)};
+
+if(['yamlindent','jsonrepair','json2csv','csv2json','json2yaml','yaml2json','xmljson','htmltext','cssvarsextract','csscolor','cssshadow','cssclampgen','svgviewbox','htmllinkcheck','robots','sitemap','htaccess','fetchsnippet','curlbuilder','httpheaders','statuscode','jwtgen','bcryptcost','sha256filehint','regexbuilder','textdiffhtml','markdownlint','readme','license','gitbranch','commitmsg','semverbump','uuidparse','urlquerysort','htmlform','svgicon','dockerfile'].includes(id)){
+ const run=()=>{let x=$('#src').value.trim(),out='';try{
+ if(id==='yamlindent'){let lines=x.split(/\r?\n/).filter(l=>l.trim()&&!l.trim().startsWith('#'));let ind=lines.map(l=>(l.match(/^ */)||[''])[0].length);if(ind.some(n=>n%2))out='Warning: indentation is not consistently in 2-space increments.\n';out+=`Checked ${lines.length} non-empty lines.\nIndent levels: ${[...new Set(ind)].sort((a,b)=>a-b).join(', ')||'none'}`}
+ if(id==='jsonrepair'){out=JSON.stringify(JSON.parse(x.replace(/,\s*([}\]])/g,'$1')),null,2)}
+ if(id==='json2csv'){let a=JSON.parse(x);if(!Array.isArray(a)||!a.every(v=>v&&typeof v==='object'&&!Array.isArray(v)))throw Error('Input must be an array of objects');let keys=[...new Set(a.flatMap(Object.keys))],esc=v=>{let z=v==null?'':typeof v==='object'?JSON.stringify(v):String(v);return /[",\r\n]/.test(z)?'"'+z.replace(/"/g,'""')+'"':z};out=[keys.map(esc).join(','),...a.map(o=>keys.map(k=>esc(o[k])).join(','))].join('\n')}
+ if(id==='csv2json'){let rows=[],row=[],cell='',quoted=false,closed=false;for(let i=0;i<x.length;i++){let c=x[i];if(quoted){if(c==='"'&&x[i+1]==='"'){cell+='"';i++}else if(c==='"'){quoted=false;closed=true}else cell+=c;continue}if(closed&&c!==','&&c!=='\r'&&c!=='\n'&&!/\s/.test(c))throw Error('Unexpected character after a closing quote');if(c==='"'){if(cell.length)throw Error('Quote must begin at the start of a CSV field');quoted=true;closed=false}else if(c===','){row.push(cell);cell='';closed=false}else if(c==='\n'||c==='\r'){if(c==='\r'&&x[i+1]==='\n')i++;row.push(cell);if(row.some(v=>v!==''))rows.push(row);row=[];cell='';closed=false}else{if(closed&&/\s/.test(c))continue;cell+=c}}if(quoted)throw Error('Unclosed quoted field');if(cell!==''||row.length){row.push(cell);if(row.some(v=>v!==''))rows.push(row)}if(!rows.length)throw Error('Enter CSV data with a header row');let h=rows.shift().map((v,i)=>i===0?v.replace(/^\uFEFF/,'').trim():v.trim());if(h.some(v=>!v))throw Error('CSV headers cannot be empty');if(new Set(h).size!==h.length)throw Error('CSV headers must be unique');let data=rows.map((r,i)=>{if(r.length!==h.length)throw Error(`Row ${i+2} has ${r.length} columns; expected ${h.length}`);return Object.fromEntries(h.map((k,j)=>[k,r[j]]))});out=JSON.stringify(data,null,2)}
+ if(id==='json2yaml'){let v=JSON.parse(x);let q=s=>/^[\w./-]+$/.test(s)?s:JSON.stringify(s);let f=(v,n)=>Array.isArray(v)?v.map(a=>' '.repeat(n)+'- '+(a&&typeof a==='object'?'\n'+f(a,n+2):JSON.stringify(a))).join('\n'):v&&typeof v==='object'?Object.entries(v).map(([k,a])=>' '.repeat(n)+q(k)+': '+(a&&typeof a==='object'?'\n'+f(a,n+2):JSON.stringify(a))).join('\n'):JSON.stringify(v);out=f(v,0)}
+ if(id==='yaml2json'){let root={},stack=[{level:-1,obj:root}],lines=x.split(/\r?\n/);for(let line of lines){if(!line.trim()||line.trim().startsWith('#'))continue;let m=line.match(/^( *)([^:]+):\s*(.*)$/);if(!m)throw Error('Lite parser expects key: value lines');let level=m[1].length,key=m[2].trim(),val=m[3].trim();while(stack.length&&stack[stack.length-1].level>=level)stack.pop();let parent=stack.length?stack[stack.length-1].obj:root;if(!val){parent[key]={};stack.push({level,obj:parent[key]})}else parent[key]=/^(true|false|null|[-+]?\d+(?:\.\d+)?)$/.test(val)?JSON.parse(val):val.replace(/^['"]|['"]$/g,'')}out=JSON.stringify(root,null,2)}
+ if(id==='xmljson'){let doc=new DOMParser().parseFromString(x,'application/xml');if(doc.querySelector('parsererror'))throw Error('Invalid XML');let f=e=>{let o={};for(let c of e.children){let v=f(c);if(o[c.tagName]!==undefined)o[c.tagName]=[].concat(o[c.tagName],v);else o[c.tagName]=v}return Object.keys(o).length?o:e.textContent.trim()};out=JSON.stringify({[doc.documentElement.tagName]:f(doc.documentElement)},null,2)}
+ if(id==='htmltext'){let d=new DOMParser().parseFromString(x,'text/html');d.querySelectorAll('script,style,noscript,template').forEach(e=>e.remove());out=(d.body.textContent||'').replace(/\s+/g,' ').trim()}
+ if(id==='cssvarsextract')out=[...new Set(x.match(/--[\w-]+\s*:/g)||[])].map(v=>v.replace(/\s*:/,'')).join('\n')||'No CSS custom properties found'
+ if(id==='csscolor')out=[...new Set(x.match(/#(?:[0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})(?![0-9a-f])|\b(?:rgb|rgba|hsl|hsla)\([^)]*\)/gi)||[])].join('\n')||'No color literals found'
+ if(id==='cssshadow')out='box-shadow: '+(x||'0 4px 12px rgba(0, 0, 0, 0.15)')+';'
+ if(id==='cssclampgen'){let a=x.split(/[ ,]+/).map(Number);if(a.length!==3||a.some(n=>!Number.isFinite(n))||a[0]<0||a[1]<a[0]||a[2]<a[1])throw Error('Enter min, preferred, max values in px (0 ≤ min ≤ preferred ≤ max)');out=`font-size: clamp(${a[0]}px, ${a[1]}px + 1vw, ${a[2]}px);`}
+ if(id==='svgviewbox'){let m=x.match(/<svg\b[^>]*\bwidth=["']([\d.]+)(?:px)?["'][^>]*\bheight=["']([\d.]+)(?:px)?["']/i);if(!m)throw Error('Could not read numeric SVG width and height');out=`viewBox="0 0 ${m[1]} ${m[2]}"`}
+ if(id==='htmllinkcheck')out=[...new Set([...x.matchAll(/\b(?:href|src)\s*=\s*["']([^"']+)["']/gi)].map(m=>m[1]))].join('\n')
+ if(id==='robots')out='User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://example.com/sitemap.xml'
+ if(id==='sitemap'){let urls=x.split(/\r?\n/).map(v=>v.trim()).filter(Boolean);if(!urls.length)throw Error('Enter at least one URL');let escXml=v=>String(v).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&apos;'}[c]));let safe=urls.map(raw=>{let u=new URL(raw);if(!['http:','https:'].includes(u.protocol)||u.username||u.password)throw Error('Each line must be a valid HTTP(S) URL');return u.href});out='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+safe.map(u=>'  <url><loc>'+escXml(u)+'</loc></url>').join('\n')+'\n</urlset>'}
+ if(id==='htaccess')out='RewriteEngine On\nRewriteRule ^old-path/?$ /new-path [R=301,L]'
+ if(id==='fetchsnippet'){let [url,method='GET',body=''] = x.split(/\r?\n/);method=method.trim().toUpperCase();if(!/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)$/.test(method))throw Error('Method must be GET, POST, PUT, PATCH, DELETE, HEAD or OPTIONS');let bodyPart='';if(body.trim()){let parsed;try{parsed=JSON.parse(body)}catch(e){throw Error('Request body must be valid JSON')}bodyPart=',\n  body: JSON.stringify('+JSON.stringify(parsed)+')'}out=`fetch(${JSON.stringify(url||'https://api.example.com')}, {\n  method: ${JSON.stringify(method)},\n  headers: { 'Content-Type': 'application/json' }${bodyPart}\n})\n  .then(response => { if (!response.ok) throw new Error(response.status); return response.json(); })\n  .then(data => console.log(data))\n  .catch(console.error);`}
+ if(id==='curlbuilder'){let [url,method='GET',headers=''] = x.split(/\r?\n/);method=method.trim().toUpperCase();if(!/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)$/.test(method))throw Error('Unsupported HTTP method');let target=url.trim()||'https://api.example.com';let parsed=new URL(target);if(!['http:','https:'].includes(parsed.protocol))throw Error('URL must use HTTP or HTTPS');let shQuote=v=>"'"+String(v).replace(/'/g,"'\\''")+"'";let headerArgs=headers.split(';').map(h=>h.trim()).filter(Boolean).map(h=>{if(/[\r\n]/.test(h))throw Error('Headers must be separated with semicolons');return ' -H '+shQuote(h)}).join('');out='curl -X '+method+' '+shQuote(parsed.href)+headerArgs}
+ if(id==='httpheaders'){let o={};for(let l of x.split(/\r?\n/)){let i=l.indexOf(':');if(i>0)o[l.slice(0,i).trim().toLowerCase()]=l.slice(i+1).trim()}out=JSON.stringify(o,null,2)}
+ if(id==='statuscode'){let n=Number(x),m={200:'OK',201:'Created',204:'No Content',301:'Moved Permanently',302:'Found',304:'Not Modified',400:'Bad Request',401:'Unauthorized',403:'Forbidden',404:'Not Found',405:'Method Not Allowed',409:'Conflict',418:"I'm a teapot",422:'Unprocessable Content',429:'Too Many Requests',500:'Internal Server Error',502:'Bad Gateway',503:'Service Unavailable',504:'Gateway Timeout'};out=m[n]||'Enter a common HTTP status code (e.g. 404)'}
+ if(id==='jwtgen'){let b=s=>btoa(unescape(encodeURIComponent(JSON.stringify(s)))).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');let payload=x?JSON.parse(x):{sub:'123',iat:Math.floor(Date.now()/1000)};out=b({alg:'none',typ:'JWT'})+'.'+b(payload)+'. (unsigned test token; not for authentication)'}
+ if(id==='bcryptcost')out='Typical bcrypt cost guidance:\n• 10–12: common baseline for many applications\n• 12–14: stronger but measure latency\n• Choose by benchmarking on production hardware\n• Prefer Argon2id where supported; never store plaintext passwords.'
+ if(id==='sha256filehint'){let file=x.trim()||'file.zip',shQuote=v=>"'"+v.replace(/'/g,"'\\''")+"'",psQuote=v=>"'"+v.replace(/'/g,"''")+"'";out='Linux: sha256sum '+shQuote(file)+'\nmacOS: shasum -a 256 '+shQuote(file)+'\nPowerShell: Get-FileHash '+psQuote(file)+' -Algorithm SHA256'}
+ if(id==='regexbuilder'){let m={email:'^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$',url:'https?:\\/\\/[^\\s]+',digits:'\\d+',phone:'\\+?[0-9() .-]{7,}',ipv4:'(?:\\d{1,3}\\.){3}\\d{1,3}',date:'\\d{4}-\\d{2}-\\d{2}',hex:'#[0-9A-Fa-f]{6}'};out=m[x.toLowerCase()]||'Choose: email, url, digits, phone, ipv4, date, hex'}
+ if(id==='textdiffhtml'){let [a,b]=x.split(/\r?\n---\r?\n/);if(b===undefined)throw Error('Separate text blocks with a line containing ---');out='Original:\n'+a+'\n\nUpdated:\n'+b+'\n\n(Plain-text comparison; no HTML is executed)'}
+ if(id==='markdownlint'){let issues=[];x.split(/\r?\n/).forEach((l,i)=>{if(/[ \t]+$/.test(l))issues.push(`Line ${i+1}: trailing whitespace`);if(/^#{1,6}[^ #]/.test(l))issues.push(`Line ${i+1}: heading needs a space after #`);if(/^[-*+]\S/.test(l))issues.push(`Line ${i+1}: list marker needs a space`)});out=issues.join('\n')||'No common Markdown formatting issues found'}
+ if(id==='readme')out='# '+(x||'Project Name')+'\n\n## Overview\nBriefly describe the project.\n\n## Features\n- Feature one\n- Feature two\n\n## Installation\n```bash\nnpm install\n```\n\n## Usage\nExplain how to use it.\n\n## License\nSpecify a license.'
+ if(id==='license')out='Copyright (c) '+new Date().getFullYear()+' '+(x||'Your Name')+'\n\nAll rights reserved.\n\nPermission is required before redistribution or modification.'
+ if(id==='gitbranch')out=x.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+ if(id==='commitmsg'){let [type='feat',scope='',msg='describe change']=x.split(/\r?\n/);if(!/^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)$/.test(type))throw Error('Type must be conventional (feat, fix, docs, etc.)');out=`${type}${scope?`(${scope})`:''}: ${msg}`}
+ if(id==='semverbump'){let parts=x.split(/\r?\n/),m=parts[0].trim().match(/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$/);if(!m)throw Error('Enter a valid SemVer version like 1.2.3 on the first line');if(m[4]&&m[4].split('.').some(v=>/^\d+$/.test(v)&&v.length>1&&v[0]==='0'))throw Error('Numeric prerelease identifiers cannot contain leading zeroes');let [major,minor,patch]=m.slice(1,4).map(BigInt),bump=(parts[1]||'patch').trim()||'patch';if(!['major','minor','patch'].includes(bump))throw Error('Bump must be major, minor or patch');if(bump==='major'){major++;minor=0n;patch=0n}else if(bump==='minor'){minor++;patch=0n}else patch++;out=`${major}.${minor}.${patch}`}
+ if(id==='uuidparse'){let m=x.match(/^\{?([0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})\}?$/i);out=m?`Valid UUID format\nVersion: ${parseInt(m[1][14],16)}\nVariant: RFC 4122`:'Invalid UUID format'}
+ if(id==='urlquerysort'){let u=new URL(x);u.searchParams.sort();out=u.toString()}
+ if(id==='htmlform'){let fields=x.split(/\r?\n/).map(v=>v.trim()).filter(Boolean);if(!fields.length)throw Error('Enter field names, one per line (optional :type)');let esc=v=>String(v).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));let types=new Set(['text','email','password','number','tel','url','date','search','checkbox']);let used=new Set();out='<form method="post">\n'+fields.map(v=>{let [rawName,rawType='text']=v.split(':');let name=rawName.trim();if(!name)throw Error('Field names cannot be blank');let type=rawType.trim().toLowerCase();if(!types.has(type))throw Error('Unsupported field type: '+type);let base=name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'field',id=base,n=2;while(used.has(id))id=base+'-'+n++;used.add(id);return `  <label for="${id}">${esc(name)}</label>\n  <input id="${id}" name="${id}" type="${type}" required>`}).join('\n')+'\n  <button type="submit">Submit</button>\n</form>'}
+ if(id==='svgicon'){let esc=v=>String(v).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&apos;'}[c]));let label=esc(x.trim()||'Icon');out='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="'+label+'">\n  <title>'+label+'</title>\n  <path d="M12 3v18M3 12h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>\n</svg>'}
+ if(id==='dockerfile'){let runtime=x.toLowerCase()||'node';let map={node:'FROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nEXPOSE 3000\nCMD ["npm","start"]',python:'FROM python:3.12-slim\nWORKDIR /app\nCOPY requirements.txt ./\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nCMD ["python","app.py"]',static:'FROM nginx:alpine\nCOPY . /usr/share/nginx/html\nEXPOSE 80'};out=map[runtime]||'Choose runtime: node, python, static'}
+ setResult(out||'No output');}catch(e){setResult('Input error: '+e.message)}};
+ on('runNew',run);on('copy',()=>copy($('#result').textContent));on('resetNew',()=>{$('#src').value='';setResult('')});
+}
+if(['jsonsort','jsonmerge','sqlfmt','htmlbeaut','cssbeaut','jsmin','svgopt','palette','regexescape','timestampiso','gitignore','dockercompose','nginx','envformat','mdtable'].includes(id)){
+ const run=()=>{try{let v=$('#src').value,o='';
+ if(id==='jsonsort'){let f=x=>Array.isArray(x)?x.map(f):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,f(x[k])])):x;o=JSON.stringify(f(JSON.parse(v)),null,2)}
+ if(id==='jsonmerge'){let [a,b]=v.split(/\r?\n---\r?\n/);if(!b)throw Error('Separate two JSON objects with a line containing ---');let m=(x,y)=>x&&y&&!Array.isArray(x)&&!Array.isArray(y)&&typeof x==='object'&&typeof y==='object'?Object.fromEntries([...new Set([...Object.keys(x),...Object.keys(y)])].map(k=>[k,k in y&&k in x?m(x[k],y[k]):k in y?y[k]:x[k]])):y;o=JSON.stringify(m(JSON.parse(a),JSON.parse(b)),null,2)}
+ if(id==='sqlfmt')o=v.replace(/\s+/g,' ').replace(/\b(SELECT|FROM|WHERE|JOIN|LEFT JOIN|RIGHT JOIN|INNER JOIN|ON|GROUP BY|ORDER BY|HAVING|LIMIT|INSERT INTO|VALUES|UPDATE|SET|DELETE FROM)\b/gi,'\n$1').trim();
+ if(id==='htmlbeaut')o=v.replace(/>\s*</g,'>\n<').split('\n').map(x=>x.trim()).join('\n');
+ if(id==='cssbeaut')o=v.replace(/\s*\{\s*/g,' {\n  ').replace(/;\s*/g,';\n  ').replace(/\s*}\s*/g,'\n}\n').trim();
+ if(id==='jsmin')o=v.replace(/\/\*[\s\S]*?\*\//g,'').replace(/(^|[^:])\/\/.*$/gm,'$1').replace(/\s+/g,' ').trim();
+ if(id==='svgopt')o=v.replace(/<!--[\s\S]*?-->/g,'').replace(/>\s+</g,'><').trim();
+ if(id==='palette'){let a=Array.from({length:6},()=>`#${Math.floor(Math.random()*16777215).toString(16).padStart(6,'0')}`);o=a.join('\n');$('#result').innerHTML=a.map(c=>`<span style="display:inline-block;background:${c};padding:14px;color:white;border-radius:8px">${c}</span>`).join(' ')}
+ if(id==='regexescape')o=v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ if(id==='timestampiso'){let raw=v.trim(),numeric=/^-?\d+(?:\.\d+)?$/.test(raw),n=Number(raw),d=numeric&&Number.isFinite(n)?new Date(Math.abs(n)<1e11?n*1000:n):new Date(raw);if(!Number.isFinite(d.getTime()))throw Error('Enter ISO date or Unix timestamp');o=d.toISOString()+'\nUnix seconds: '+Math.floor(d.getTime()/1000)+'\nUnix milliseconds: '+d.getTime()}
+ if(id==='gitignore'){let m={node:'node_modules/\n.env\ndist/\n*.log',python:'__pycache__/\n*.py[cod]\n.venv/\n.env',java:'target/\n*.class\n.idea/',android:'.gradle/\nbuild/\nlocal.properties\n*.iml',web:'node_modules/\ndist/\n.env\n*.log'};o=m[v.trim().toLowerCase()]||'Enter stack: node, python, java, android, web'}
+ if(id==='dockercompose'){let n=(v.trim()||'app').replace(/[^a-zA-Z0-9_-]/g,'');if(!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$/.test(n))throw Error('Enter a service name starting with a letter or number (max 63 characters)');o=`services:\n  ${n}:\n    build: .\n    ports:\n      - "3000:3000"\n    restart: unless-stopped`}
+ if(id==='nginx'){let d=v.trim()||'example.com';if(/[\s;{}\r\n]/.test(d))throw Error('Enter one hostname or IP address without paths or directives');let parsed;try{parsed=new URL(d.includes('://')?d:'https://'+d)}catch(e){throw Error('Enter a valid hostname or IP address')}if(!['https:','http:'].includes(parsed.protocol)||parsed.username||parsed.password||parsed.pathname!=='/'||parsed.search||parsed.hash)throw Error('Enter a hostname or IP only, optionally with a port');d=parsed.host;o=`server {\n    listen 80;\n    server_name ${d};\n    location / {\n        proxy_pass http://127.0.0.1:3000;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n    }\n}`}
+ if(id==='envformat')o=v.split(/\r?\n/).map(x=>x.trim()).filter(x=>x&&!x.startsWith('#')&&x.includes('=')).sort((a,b)=>a.split('=')[0].localeCompare(b.split('=')[0])).join('\n');
+ if(id==='mdtable'){let r=v.trim().split(/\r?\n/).map(x=>x.split(',').map(c=>c.trim().replace(/\|/g,'\\|'))),h=r[0];o='| '+h.join(' | ')+' |\n| '+h.map(()=> '---').join(' | ')+' |'+(r.length>1?'\n'+r.slice(1).map(x=>'| '+h.map((_,i)=>x[i]||'').join(' | ')+' |').join('\n'):'')}
+ setResult(o||'No output')}catch(e){setResult('Input error: '+e.message)}};
+ on('runGeneric',run);on('copy',()=>copy($('#result').textContent));on('resetGeneric',()=>{$('#src').value='';setResult('')});
+}
+if(id==='json'){on('format',()=>{try{let o=JSON.parse($('#src').value);setResult(JSON.stringify(o,null,2));toast('Valid JSON')}catch(e){setResult('Error: '+e.message)}});on('minify',()=>{try{setResult(JSON.stringify(JSON.parse($('#src').value)))}catch(e){setResult('Error: '+e.message)}});on('validate',()=>{try{JSON.parse($('#src').value);setResult('✓ Valid JSON')}catch(e){setResult('✕ '+e.message)}})}
+if(id==='base64'){on('enc',()=>{try{setResult(btoa(unescape(encodeURIComponent($('#src').value))))}catch(e){setResult('Error: '+e.message)}});on('dec',()=>{try{setResult(decodeURIComponent(escape(atob($('#src').value.trim()))))}catch(e){setResult('Invalid Base64 input')}})}
+if(id==='url'){on('enc',()=>setResult(encodeURIComponent($('#src').value)));on('dec',()=>{try{setResult(decodeURIComponent($('#src').value))}catch(e){setResult('Invalid encoded text')}})}
+if(id==='uuid'){on('generate',()=>{try{let n=Math.max(1,Math.min(50,parseInt($('#qty').value)||1));setResult(Array.from({length:n},createUuid).join('\n'))}catch(e){setResult('UUID error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+if(id==='password'){on('generate',()=>{try{let len=Math.max(8,Math.min(128,parseInt($('#len').value)||20)),n=Math.max(1,Math.min(20,parseInt($('#qty').value)||1));let sets=[];if($('#upper').checked)sets.push('ABCDEFGHJKLMNPQRSTUVWXYZ');if($('#lower').checked)sets.push('abcdefghijkmnopqrstuvwxyz');if($('#nums').checked)sets.push('23456789');if($('#symbols').checked)sets.push('!@#$%^&*()-_=+[]{}?');if(!sets.length){setResult('Select at least one character set');return}let all=sets.join('');function pick(s){return s[secureRandomIndex(s.length)]}let out=Array.from({length:n},()=>{let chars=sets.map(pick);while(chars.length<len)chars.push(pick(all));for(let i=chars.length-1;i>0;i--){let j=secureRandomIndex(i+1);[chars[i],chars[j]]=[chars[j],chars[i]]}return chars.join('')});setResult(out.join('\n'))}catch(e){setResult('Password error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+if(id==='color'){let sync=()=>{let hex=$('#picker').value;$('#hex').value=hex;let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);setResult(`rgb(${r}, ${g}, ${b})`,'rgb');let rr=r/255,gg=g/255,bb=b/255,max=Math.max(rr,gg,bb),min=Math.min(rr,gg,bb),h,s,l=(max+min)/2;if(max===min)h=s=0;else{let d=max-min;s=l>.5?d/(2-max-min):d/(max+min);switch(max){case rr:h=(gg-bb)/d+(gg<bb?6:0);break;case gg:h=(bb-rr)/d+2;break;default:h=(rr-gg)/d+4}h*=60}setResult(`hsl(${Math.round(h)}, ${Math.round(s*100)}%, ${Math.round(l*100)}%)`,'hsl')};$('#picker').addEventListener('input',sync);$('#hex').addEventListener('input',()=>{if(/^#[0-9a-f]{6}$/i.test($('#hex').value)){$('#picker').value=$('#hex').value;sync()}});sync();on('copyhex',()=>copy($('#hex').value));on('copyrgb',()=>copy($('#rgb').textContent));on('copyhsl',()=>copy($('#hsl').textContent))}
+if(id==='jwt'){on('decode',()=>{try{let p=$('#src').value.trim().split('.');if(p.length<2)throw Error('Token must have at least two segments');let dec=s=>JSON.stringify(JSON.parse(decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/'))))),null,2);setResult(dec(p[0]),'header');setResult(dec(p[1]),'payload')}catch(e){setResult('Unable to decode: '+e.message,'header');setResult('','payload')}});on('clear',()=>{$('#src').value='';setResult('','header');setResult('','payload')})}
+if(id==='text'){let update=()=>{let s=$('#src').value;$('#stats').textContent=`Words: ${s.trim()?s.trim().split(/\s+/).length:0}\nCharacters: ${s.length}\nNo spaces: ${s.replace(/\s/g,'').length}\nLines: ${s? s.split(/\r?\n/).length:0}`};$('#src').addEventListener('input',update);update();on('upper',()=>{$('#src').value=$('#src').value.toUpperCase();update()});on('lower',()=>{$('#src').value=$('#src').value.toLowerCase();update()});on('title',()=>{$('#src').value=$('#src').value.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());update()});on('trim',()=>{$('#src').value=$('#src').value.split(/\r?\n/).map(x=>x.trim()).join('\n');update()});on('copy',()=>copy($('#src').value))}
+if(id==='timestamp'){on('convert',()=>{let v=$('#ts').value.trim(),n=Number(v);if(!v||!Number.isFinite(n)){setResult('Enter a valid timestamp');return}let d=new Date(Math.abs(n)<1e11?n*1000:n);setResult(Number.isNaN(d.getTime())?'Invalid timestamp':d.toISOString())});on('now',()=>{$('#ts').value=String(Date.now());setResult(new Date().toISOString())});on('todate',()=>{let d=new Date($('#date').value);setResult(Number.isNaN(d.getTime())?'Invalid date':`${Math.floor(d.getTime()/1000)} seconds\n${d.getTime()} milliseconds`)})}
+if(id==='regex'){on('test',()=>{try{let flags=$('#flags').value;if(!flags.includes('g'))flags+='g';let re=new RegExp($('#pattern').value,flags);let s=$('#src').value,m=[...s.matchAll(re)];setResult(m.length?m.map(x=>`Match: ${x[0]}${x.index!==undefined?' (index '+x.index+')':''}`).join('\n'):`No matches.\nPattern is valid.`)}catch(e){setResult('Regex error: '+e.message)}});on('clear',()=>{$('#src').value='';setResult('')})}
+if(id==='html'){let esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let dec=s=>{let d=document.createElement('textarea');d.innerHTML=s;return d.value};on('escape',()=>setResult(esc($('#src').value)));on('unescape',()=>setResult(dec($('#src').value)));on('copy',()=>copy($('#result').textContent))}
+if(id==='hash'){on('hashgo',async()=>{try{if(!crypto.subtle)throw Error('Web Crypto unavailable; use HTTPS or localhost');let alg=$('#algo').value,buf=await crypto.subtle.digest(alg,new TextEncoder().encode($('#src').value));setResult([...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join(''))}catch(e){setResult('Hash error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+if(id==='csvjson'){function parseCSV(s){let rows=[],row=[],v='',q=false;for(let i=0;i<s.length;i++){let c=s[i];if(q&&c==='"'&&s[i+1]==='"'){v+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){row.push(v);v=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&s[i+1]==='\n')i++;row.push(v);if(row.some(x=>x!==''))rows.push(row);row=[];v=''}else v+=c}if(q)throw Error('Unclosed quoted field');row.push(v);if(row.some(x=>x!==''))rows.push(row);return rows}on('tojson',()=>{try{let r=parseCSV($('#src').value);if(!r.length)throw Error('No CSV data');let h=r.shift();if(h.some(k=>!k.trim()))throw Error('CSV headers cannot be blank');if(new Set(h).size!==h.length)throw Error('CSV headers must be unique');if(r.some(row=>row.length>h.length))throw Error('A data row has more columns than the header');setResult(JSON.stringify(r.map(row=>Object.fromEntries(h.map((k,i)=>[k,row[i]??'']))),null,2))}catch(e){setResult('CSV error: '+e.message)}});on('tocsv',()=>{try{let a=JSON.parse($('#src').value);if(!Array.isArray(a)||a.some(o=>!o||typeof o!=='object'||Array.isArray(o)))throw Error('Expected an array of objects');let h=[...new Set(a.flatMap(o=>Object.keys(o)))];let q=v=>{v=String(v??'');return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};setResult([h.map(q).join(','),...a.map(o=>h.map(k=>q(o[k])).join(','))].join('\n'))}catch(e){setResult('JSON error: '+e.message)}})}
+if(id==='markdown'){function md(s){let esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));return s.split(/\n/).map(line=>{let x=esc(line);if(/^### /.test(x))return '<h3>'+x.slice(4)+'</h3>';if(/^## /.test(x))return '<h2>'+x.slice(3)+'</h2>';if(/^# /.test(x))return '<h1>'+x.slice(2)+'</h1>';if(/^[-*] /.test(x))return '<p>• '+x.slice(2)+'</p>';return '<p>'+x.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`(.+?)`/g,'<code>$1</code>')+'</p>'}).join('')}on('previewMd',()=>$('#preview').innerHTML=md($('#src').value));on('copyhtml',()=>copy($('#preview').innerHTML));$('#preview').innerHTML=md($('#src').value)}
+if(id==='calc'){on('calculate',()=>{try{let s=$('#expr').value.trim();if(!/^[0-9+\-*/().,%\sA-Za-z]+$/.test(s))throw Error('Invalid characters');let names=['sin','cos','tan','sqrt','abs','round','floor','ceil','log','pow','min','max','PI','E'];if(new RegExp('\\b(?!'+names.join('|')+'\\b)[A-Za-z]+').test(s))throw Error('Unsupported function');let fn=Function('Math','return ('+s.replace(/\b(sin|cos|tan|sqrt|abs|round|floor|ceil|log|pow|min|max|PI|E)\b/g,'Math.$1')+')');let v=fn(Math);if(!Number.isFinite(v))throw Error('Result is not finite');setResult(String(v))}catch(e){setResult('Calculation error: '+e.message)}});on('clear',()=>{$('#expr').value='';setResult('')})}
+if(id==='lorem'){let words='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'.split(' ');on('generate',()=>{let p=Math.max(1,Math.min(20,+$('#paras').value||3)),n=Math.max(10,Math.min(300,+$('#words').value||60));let out=[];for(let j=0;j<p;j++){let a=[];for(let i=0;i<n;i++)a.push(words[Math.floor(Math.random()*words.length)]);a[0]=a[0][0].toUpperCase()+a[0].slice(1);a[a.length-1]+='.';out.push(a.join(' '))}setResult(out.join('\n\n'))});on('copy',()=>copy($('#result').textContent))}
+if(id==='case'){let tokens=s=>s.trim().replace(/([a-z0-9])([A-Z])/g,'$1 $2').split(/[^A-Za-z0-9]+/).filter(Boolean).map(x=>x.toLowerCase());let t=()=>tokens($('#src').value);on('camel',()=>setResult(t().map((x,i)=>i?x[0].toUpperCase()+x.slice(1):x).join('')));on('snake',()=>setResult(t().join('_')));on('kebab',()=>setResult(t().join('-')));on('pascal',()=>setResult(t().map(x=>x[0].toUpperCase()+x.slice(1)).join('')));on('copy',()=>copy($('#result').textContent))}
+if(id==='slug'){on('sluggo',()=>setResult($('#src').value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')));on('copy',()=>copy($('#result').textContent))}
+if(id==='dedupe'){on('dedupego',()=>{let a=[...new Set($('#src').value.split(/\r?\n/))];if($('#sortlines').checked)a.sort((x,y)=>x.localeCompare(y));setResult(a.join('\n'))});on('copy',()=>copy($('#result').textContent))}
+if(id==='json-ts'){on('tsgo',()=>{try{let value=JSON.parse($('#src').value),rootName=($('#typename').value||'Root').replace(/[^A-Za-z0-9_$]/g,'')||'Root',used=new Set(),interfaces=[];const identifier=(v,fallback)=>{let n=String(v||fallback).replace(/[^A-Za-z0-9_$]/g,'');if(!n)n=fallback;if(/^\d/.test(n))n='_'+n;return n[0].toUpperCase()+n.slice(1)};const infer=(v,name)=>{if(v===null)return 'null';if(Array.isArray(v))return v.length?`${infer(v[0],name)}[]`:'unknown[]';if(v&&typeof v==='object'){let base=identifier(name,'Nested'),iface=base,suffix=2;while(used.has(iface))iface=base+suffix++;used.add(iface);let props=Object.entries(v).map(([k,x])=>`  ${/^[$A-Z_a-z][$\w]*$/.test(k)?k:JSON.stringify(k)}: ${infer(x,k)};`).join('\n');interfaces.push(`interface ${iface} {\n${props}\n}`);return iface}return typeof v==='string'?'string':typeof v==='number'?(Number.isInteger(v)?'number':'number'):typeof v==='boolean'?'boolean':'unknown'};let rootType=infer(value,rootName);let output=interfaces.length?interfaces.join('\n\n'):`type ${identifier(rootName,'Root')} = ${rootType};`;setResult(output)}catch(e){setResult('JSON error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+if(id==='query'){on('querygo',()=>{try{let raw=$('#src').value.trim(),u=new URL(raw.includes('?')?raw:(raw.startsWith('?')?location.origin+raw:location.origin+'/?'+raw));let o={};u.searchParams.forEach((v,k)=>{if(k in o)o[k]=[].concat(o[k],v);else o[k]=v});setResult(JSON.stringify(o,null,2))}catch(e){setResult('URL error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+if(id==='diff'){on('diffgo',()=>{let a=$('#left').value.split(/\r?\n/),b=$('#right').value.split(/\r?\n/),n=Math.max(a.length,b.length),out=[];for(let i=0;i<n;i++){if(a[i]===b[i])out.push('  '+(a[i]??''));else{if(a[i]!==undefined)out.push('- '+a[i]);if(b[i]!==undefined)out.push('+ '+b[i])}}setResult(out.join('\n'))})}
+if(id==='htmlmin'){on('minifygo',()=>{let x=$('#src').value.replace(/<!--[\s\S]*?-->/g,'').replace(/>\s+</g,'><').trim();setResult(x)});on('copy',()=>copy($('#result').textContent))}
+if(id==='cssmin'){on('minifygo',()=>{let src=$('#src').value,out='',quote='',escape=false,comment=false,space=false;for(let i=0;i<src.length;i++){let c=src[i],n=src[i+1];if(comment){if(c==='*'&&n==='/'){comment=false;i++}continue}if(quote){out+=c;if(escape)escape=false;else if(c==='\\')escape=true;else if(c===quote)quote='';continue}if(c==='/'&&n==='*'){comment=true;i++;continue}if(c==='"'||c==="'"){if(space&&out&&!/[\s{(:,;>]$/.test(out))out+=' ';space=false;quote=c;out+=c;continue}if(/\s/.test(c)){space=true;continue}if(/[{}:;,>]/.test(c)){out=out.trimEnd()+c;space=false;continue}if(space&&out&&!/[\s{(:,;>]$/.test(out))out+=' ';space=false;out+=c}if(comment)throw Error('Unclosed CSS comment');if(quote)throw Error('Unclosed CSS string');setResult(out.replace(/;}/g,'}').trim())});on('copy',()=>copy($('#result').textContent))}
+if(id==='numberbase'){on('convertgo',()=>{try{let raw=$('#src').value.trim(),from=Number($('#from').value),to=Number($('#to').value);if(!raw)throw Error('Enter a number');let body=raw.replace(/^[+-]/,''),sign=raw.startsWith('-')?-1n:1n,patterns={2:/^[01]+$/,8:/^[0-7]+$/,10:/^\d+$/,16:/^[0-9a-f]+$/i};if(!patterns[from]?.test(body))throw Error(`Invalid digits for base ${from}`);let prefix={2:'0b',8:'0o',10:'',16:'0x'}[from],value=BigInt(prefix+body)*sign;setResult(value.toString(to).toUpperCase())}catch(e){setResult('Conversion error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+if(id==='timer'){let remaining=1500,interval=null;const minutes=()=>Math.max(1,Math.min(180,Number($('#mins').value)||25));let paint=()=>{$('#timerface').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')};const stop=()=>{if(interval!==null){clearInterval(interval);interval=null}};window.__devPocketCleanup=stop;on('start',()=>{if(interval!==null)return;if(remaining<=0)remaining=minutes()*60;interval=setInterval(()=>{remaining=Math.max(0,remaining-1);paint();if(remaining===0){stop();$('#timerstatus').textContent='Focus session complete!'}},1000);$('#timerstatus').textContent='Timer running'});on('pause',()=>{stop();$('#timerstatus').textContent='Paused'});on('reset',()=>{stop();remaining=minutes()*60;paint();$('#timerstatus').textContent='Ready to focus'});$('#mins').addEventListener('change',()=>{if(interval===null){remaining=minutes()*60;paint();$('#timerstatus').textContent='Ready to focus'}});paint()}
+
+if(id==='xmlfmt'){on('xmlgo',()=>{try{let x=$('#src').value.replace(/>\s*</g,'>\n<').trim(),depth=0;setResult(x.split('\n').map(line=>{let t=line.trim();if(/^<\/[^>]+/.test(t))depth=Math.max(0,depth-1);let out='  '.repeat(depth)+t;if(/^<[^!?/][^>]*[^/]?>$/.test(t)&&!/<\/[^>]+>$/.test(t))depth++;return out}).join('\n'))}catch(e){setResult('XML error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+if(id==='bytes'){on('bytesgo',()=>{let n=Number($('#src').value);if(!Number.isFinite(n)||n<0){setResult('Enter a non-negative byte count');return}setResult(['B','KB','MB','GB','TB'].map((u,i)=>`${(n/1024**i).toLocaleString(undefined,{maximumFractionDigits:3})} ${u}`).join('\n'))})}
+if(id==='contrast'){on('contrastgo',()=>{try{let lum=h=>{h=h.trim().replace(/^#/,'');if(!/^(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(h))throw Error('Invalid HEX');if(h.length===3)h=[...h].map(x=>x+x).join('');let a=[0,2,4].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return .2126*a[0]+.7152*a[1]+.0722*a[2]},a=lum($('#fg').value),b=lum($('#bg').value),r=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);setResult(`Contrast ratio: ${r.toFixed(2)}:1\n${r>=7?'WCAG AAA normal text':r>=4.5?'WCAG AA normal text':r>=3?'AA large text only':'Fails WCAG AA'}`)}catch(e){setResult('Enter valid 3- or 6-digit HEX colors, e.g. #fff or #112233')}})}
+if(id==='gradient'){on('gradgo',()=>{let v=`linear-gradient(${$('#angle').value||135}deg, ${$('#c1').value}, ${$('#c2').value})`;$('#gradpreview').style.background=v;setResult(`background: ${v};`)});on('copy',()=>copy($('#result').textContent))}
+if(id==='aspect'){on('aspectgo',()=>{let w=Number($('#w').value),h=Number($('#h').value),raw=$('#nw').value,nw=raw===''?null:Number(raw);if(!Number.isSafeInteger(w)||!Number.isSafeInteger(h)||w<=0||h<=0){setResult('Width and height must be positive whole numbers');return}if(nw!==null&&(!Number.isFinite(nw)||nw<=0)){setResult('New width must be positive, or leave it blank');return}let a=w,b=h;while(b){[a,b]=[b,a%b]}setResult(`Aspect ratio: ${w/a}:${h/a}\n${nw!==null?`Height at width ${nw}: ${(nw*h/w).toFixed(2)} px`:`Ratio decimal: ${(w/h).toFixed(4)}`}`)})}
+if(id==='sortlines'){on('sortgo',()=>{let a=$('#src').value.split(/\r?\n/),o=$('#order').value;a.sort(o==='num'?(x,y)=>Number(x)-Number(y):(x,y)=>x.localeCompare(y,undefined,{numeric:true,sensitivity:'base'}));if(o==='desc')a.reverse();setResult(a.join('\n'))});on('copy',()=>copy($('#result').textContent))}
+if(id==='escapejs'){on('escgo',()=>setResult($('#src').value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));on('copy',()=>copy($('#result').textContent))}
+if(id==='htmlpreview'){let preview=()=>{let doc=new DOMParser().parseFromString($('#src').value,'text/html'),meta=doc.createElement('meta');meta.httpEquiv='Content-Security-Policy';meta.content="default-src 'none'; img-src data: blob:; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'";doc.head.prepend(meta);$('#htmlframe').srcdoc='<!doctype html>\n'+doc.documentElement.outerHTML};on('previewgo',preview);preview()}
+if(id==='jsonpath'){on('pathgo',()=>{try{let o=JSON.parse($('#src').value),p=$('#path').value.replace(/\[(\d+)\]/g,'.$1').split('.').filter(Boolean);for(let k of p)o=o?.[k];setResult(o===undefined?'Path not found':typeof o==='string'?o:JSON.stringify(o,null,2))}catch(e){setResult('Error: '+e.message)}})}
+if(id==='unixhuman'){on('relativego',()=>{let d=new Date($('#date').value),diff=(d-Date.now())/1000;if(!Number.isFinite(+d)){setResult('Invalid date');return}let abs=Math.abs(diff),unit=abs<60?'second':abs<3600?'minute':abs<86400?'hour':abs<2592000?'day':abs<31536000?'month':'year',n=Math.max(1,Math.round(abs/({second:1,minute:60,hour:3600,day:86400,month:2592000,year:31536000}[unit])));setResult(new Intl.RelativeTimeFormat(undefined,{numeric:'auto'}).format(Math.sign(diff)*n,unit))})}
+if(id==='cssfmt'){on('formatgo',()=>{let x=$('#src').value.replace(/\s*([{}:;,])\s*/g,'$1').replace(/\s+/g,' ').replace(/\{/g,' {\n  ').replace(/;/g,';\n  ').replace(/\n  \}/g,'\n}').replace(/\s*\}/g,'\n}').trim();setResult(x)});on('copy',()=>copy($('#result').textContent))}
+if(id==='htmlfmt'){on('formatgo',()=>{let x=$('#src').value.replace(/>\s*</g,'>\n<').trim(),depth=0,out=[];for(let line of x.split('\n')){let t=line.trim();if(/^<\//.test(t))depth=Math.max(0,depth-1);out.push('  '.repeat(depth)+t);if(/^<([a-z][^\s/>]*)\b[^>]*>$/.test(t)&&!/<\//.test(t)&&!/<(?:area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)\b/i.test(t))depth++}setResult(out.join('\n'))});on('copy',()=>copy($('#result').textContent))}
+if(id==='sqlfmt'){on('formatgo',()=>{let x=$('#src').value.trim().replace(/\s+/g,' ');x=x.replace(/\b(SELECT|FROM|WHERE|GROUP BY|ORDER BY|HAVING|LIMIT|INSERT INTO|VALUES|UPDATE|SET|DELETE FROM|JOIN|LEFT JOIN|RIGHT JOIN|INNER JOIN|ON|AND|OR)\b/gi,'\n$1').replace(/^\n/,'');setResult(x.split('\n').map((l,i)=>i? '  '+l.trim():l.trim()).join('\n'))});on('copy',()=>copy($('#result').textContent))}
+if(id==='ipcalc'){on('ipgo',()=>{try{let m=$('#src').value.trim().match(/^(\d{1,3}(?:\.\d{1,3}){3})\/(\d{1,2})$/);if(!m)throw Error('Use IPv4/CIDR, e.g. 192.168.1.10/24');let oct=m[1].split('.').map(Number),p=+m[2];if(oct.some(x=>x>255)||p>32)throw Error('Invalid IPv4 address or prefix');let ip=oct.reduce((a,x)=>(a*256+x)>>>0,0)>>>0,mask=p===0?0:(0xffffffff<<(32-p))>>>0,net=(ip&mask)>>>0,bcast=(net|(~mask>>>0))>>>0;let fmt=n=>[n>>>24,(n>>>16)&255,(n>>>8)&255,n&255].join('.'),hosts=p===32?1:p===31?2:Math.max(0,2**(32-p)-2);setResult(`Network: ${fmt(net)}\nBroadcast: ${fmt(bcast)}\nSubnet mask: ${fmt(mask)}\nPrefix: /${p}\nTotal addresses: ${2**(32-p)}\nUsable hosts: ${hosts}\nHost range: ${p===32?fmt(net):p===31?fmt(net)+' – '+fmt(bcast):fmt(net+1)+' – '+fmt(bcast-1)}`)}catch(e){setResult('Subnet error: '+e.message)}})}
+if(id==='urlinspect'){on('inspectgo',()=>{try{let u=new URL($('#src').value);setResult(`Protocol: ${u.protocol}\nHost: ${u.host}\nHostname: ${u.hostname}\nPort: ${u.port||'(default)'}\nPath: ${u.pathname}\nQuery: ${u.search||'(none)'}\nHash: ${u.hash||'(none)'}\nUsername: ${u.username||'(none)'}\nOrigin: ${u.origin}`)}catch(e){setResult('Invalid absolute URL')}})}
+if(id==='mdtable'){on('tablego',()=>{let rows=$('#src').value.split(/\r?\n/).filter(x=>x.trim()).map(x=>x.split(',').map(v=>v.trim().replace(/\|/g,'\\|')));if(!rows.length){setResult('Enter at least one row');return}let cols=Math.max(...rows.map(r=>r.length));rows=rows.map(r=>Array.from({length:cols},(_,i)=>r[i]||''));setResult('| '+rows[0].join(' | ')+' |\n| '+Array(cols).fill('---').join(' | ')+' |'+(rows.length>1?'\n'+rows.slice(1).map(r=>'| '+r.join(' | ')+' |').join('\n'):''))});on('copy',()=>copy($('#result').textContent))}
+if(id==='datauri'){on('dataurigo',()=>setResult(`data:${$('#mime').value};charset=utf-8;base64,${btoa(unescape(encodeURIComponent($('#src').value)))}`));on('copy',()=>copy($('#result').textContent))}
+if(id==='jsonsample'){on('samplego',()=>{try{let schema=JSON.parse($('#src').value),make=v=>{if(v==='string')return 'sample';if(v==='number')return 123;if(v==='boolean')return true;if(v===null)return null;if(Array.isArray(v))return v.length?[make(v[0])]:[];if(typeof v==='object'&&v)return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,make(x)]));return v};setResult(JSON.stringify(make(schema),null,2))}catch(e){setResult('Schema error: '+e.message)}})}
+if(id==='cssunits'){on('unitsgo',()=>{let v=Number($('#val').value),b=Number($('#base').value),f=$('#unitfrom').value,t=$('#unitto').value;if(!Number.isFinite(v)||!(b>0)){setResult('Enter a valid value and positive base size');return}let px=f==='px'?v:v*b,res=t==='px'?px:px/b;setResult(`${res.toFixed(4).replace(/\.?0+$/,'')} ${t}`)})}
+if(id==='epochbatch'){on('epochgo',()=>{let lines=$('#src').value.split(/\r?\n/).filter(x=>x.trim());setResult(lines.map(x=>{let n=Number(x.trim());if(!Number.isFinite(n))return `${x}: invalid`;let ms=Math.abs(n)<1e11?n*1000:n,d=new Date(ms);return `${x} → ${Number.isNaN(d.getTime())?'invalid':d.toISOString()}`} ).join('\n'))});on('copy',()=>copy($('#result').textContent))}
+
+if(id==='jsondiff'){on('jsondiffgo',()=>{try{let a=JSON.parse($('#left').value),b=JSON.parse($('#right').value),changes=[];const stable=v=>Array.isArray(v)?v.map(stable):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])])):v;function walk(x,y,path=''){if(JSON.stringify(stable(x))===JSON.stringify(stable(y)))return;let xo=x!==null&&typeof x==='object'&&!Array.isArray(x),yo=y!==null&&typeof y==='object'&&!Array.isArray(y);if(xo&&yo){for(let k of new Set([...Object.keys(x),...Object.keys(y)])){let p=path?`${path}.${k}`:k,hasX=Object.prototype.hasOwnProperty.call(x,k),hasY=Object.prototype.hasOwnProperty.call(y,k);if(!hasX)changes.push(`+ ${p}: ${JSON.stringify(y[k])}`);else if(!hasY)changes.push(`- ${p}: ${JSON.stringify(x[k])}`);else walk(x[k],y[k],p)}}else changes.push(`${path||'(root)'}\n- ${JSON.stringify(x)}\n+ ${JSON.stringify(y)}`)}walk(a,b);setResult(changes.join('\n')||'No differences')}catch(e){setResult('JSON diff error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+if(['htmlentities','querybuild','hexbin','base32','semver','cron','cssspec','metahtml','loremwords','jsonflatten','hexcolor','csp','curlparse','htmlmeta'].includes(id)){
+on('runextra',()=>{let x=$('#src').value;try{let out='';
+
+if(id==='htmlentities'){if(x.startsWith('decode:')){let t=document.createElement('textarea');t.innerHTML=x.slice(7);out=t.value}else out=x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+if(id==='querybuild'){let p=new URLSearchParams();x.split(/\r?\n/).forEach(l=>{let i=l.indexOf('=');if(i>=0)p.append(l.slice(0,i).trim(),l.slice(i+1).trim())});out=p.toString()}
+if(id==='hexbin'){let t=x.trim();if(!t)throw Error('Enter binary or hexadecimal data');if(/^[01\s]+$/.test(t)){let bits=t.replace(/\s/g,'');if(bits.length%8)throw Error('Binary input must contain complete 8-bit bytes');out=bits.match(/.{8}/g).map(b=>parseInt(b,2).toString(16).padStart(2,'0').toUpperCase()).join(' ')}else{let h=t.replace(/^0x/i,'').replace(/[\s,]/g,'');if(!/^[0-9a-f]+$/i.test(h)||h.length%2)throw Error('Enter an even number of hexadecimal digits (for example 4869)');out=h.match(/.{2}/g).map(v=>parseInt(v,16).toString(2).padStart(8,'0')).join(' ')}}
+if(id==='base32'){const abc='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';if(x.startsWith('decode:')){let raw=x.slice(7).replace(/\s/g,'').toUpperCase(),s=raw.replace(/=+$/,''),pad=raw.length-s.length,rem=s.length%8,expected={0:0,2:6,4:4,5:3,7:1}[rem];if(expected===undefined||(/[=]/.test(s))||(pad&&((pad!==expected)||raw.length%8!==0)))throw Error('Invalid Base32 length or padding');let bits='';for(let c of s){let n=abc.indexOf(c);if(n<0)throw Error('Invalid Base32 character');bits+=n.toString(2).padStart(5,'0')}let full=bits.length-bits.length%8,tail=bits.slice(full);if(tail&&/[1]/.test(tail))throw Error('Non-zero padding bits in Base32 input');let bytes=(bits.slice(0,full).match(/.{8}/g)||[]).map(b=>parseInt(b,2));try{out=new TextDecoder('utf-8',{fatal:true}).decode(new Uint8Array(bytes))}catch(e){throw Error('Decoded Base32 is not valid UTF-8')}}else{let bytes=new TextEncoder().encode(x),bits=[...bytes].map(b=>b.toString(2).padStart(8,'0')).join(''),chunks=bits.match(/.{1,5}/g)||[],s=chunks.map(b=>abc[parseInt(b.padEnd(5,'0'),2)]).join('');out=s.padEnd(Math.ceil(s.length/8)*8,'=')}}
+if(id==='semver'){let [a,b]=x.split(/\r?\n/).map(v=>v.trim().replace(/^v/,''));if(!a||!b)throw Error('Enter versions on two lines');let parse=v=>{let m=v.match(/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z.-]+))?(?:\+[0-9A-Za-z.-]+)?$/);if(!m)throw Error(`Invalid semantic version: ${v}`);return{core:m.slice(1,4).map(BigInt),pre:m[4]?m[4].split('.'):null}};let A=parse(a),B=parse(b),cmp=0;for(let i=0;i<3&&cmp===0;i++)cmp=A.core[i]===B.core[i]?0:A.core[i]>B.core[i]?1:-1;if(cmp===0&&A.pre!==B.pre){if(!A.pre)cmp=1;else if(!B.pre)cmp=-1;else{for(let i=0;i<Math.max(A.pre.length,B.pre.length)&&cmp===0;i++){let aa=A.pre[i],bb=B.pre[i];if(aa===undefined)cmp=-1;else if(bb===undefined)cmp=1;else if(aa===bb)cmp=0;else if(/^\d+$/.test(aa)&&/^\d+$/.test(bb))cmp=BigInt(aa)>BigInt(bb)?1:-1;else if(/^\d+$/.test(aa))cmp=-1;else if(/^\d+$/.test(bb))cmp=1;else cmp=aa>bb?1:-1}}}out=cmp===0?'Versions are equal':cmp>0?`${a} is newer than ${b}`:`${b} is newer than ${a}`}
+if(id==='cron'){let f=x.trim().split(/\s+/),ranges=[[0,59],[0,23],[1,31],[1,12],[0,7]];if(f.length!==5)throw Error('Use 5 fields: minute hour day month weekday');const valid=(v,min,max)=>v.split(',').every(part=>{let [base,stepRaw]=part.split('/');if(part.includes('/')&&(!/^\d+$/.test(stepRaw)||Number(stepRaw)<1||Number(stepRaw)>max-min+1))return false;if(base==='*')return true;let r=base.split('-');if(r.length===1)return /^\d+$/.test(r[0])&&Number(r[0])>=min&&Number(r[0])<=max;if(r.length===2)return r.every(n=>/^\d+$/.test(n))&&Number(r[0])>=min&&Number(r[1])<=max&&Number(r[0])<=Number(r[1]);return false});for(let i=0;i<5;i++)if(!valid(f[i],...ranges[i]))throw Error(`Invalid ${['minute','hour','day of month','month','weekday'][i]} field: ${f[i]}`);out=`✓ Valid five-field cron expression\nMinute: ${f[0]}\nHour: ${f[1]}\nDay of month: ${f[2]}\nMonth: ${f[3]}\nDay of week: ${f[4]}\n\nCommon meaning: ${f[0]==='*'&&f[1]==='*'?'Every minute':f[0].startsWith('*/')?`Every ${f[0].slice(2)} minutes`:'Custom schedule (verify with your cron service)'}`}
+if(id==='cssspec'){let s=x.replace(/:where\([^)]*\)/g,'').replace(/:is\(([^)]*)\)/g,'$1'),ids=(s.match(/#[\w-]+/g)||[]).length,classes=(s.match(/\.[\w-]+|\[[^\]]+\]|:(?!:)[\w-]+(?:\([^)]*\))?/g)||[]).length,types=(s.match(/(^|[\s>+~])(?:[a-z][\w-]*|::[\w-]+)/gi)||[]).length;out=`Specificity: ${ids},${classes},${types}\nIDs: ${ids}\nClasses/attributes/pseudo-classes: ${classes}\nElements/pseudo-elements: ${types}`}
+if(id==='metahtml'){let esc=v=>v.replace(/&/g,'&amp;').replace(/\"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'),title=esc(x.trim()||'Page title');out=`<meta name="description" content="${title}">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta charset="UTF-8">`}
+if(id==='loremwords'){let words=x.trim().split(/\s+/).filter(Boolean),sent=(x.match(/[.!?]+/g)||[]).length,paras=x.split(/\n\s*\n/).filter(v=>v.trim()).length;out=`Words: ${words.length}\nCharacters: ${x.length}\nCharacters (no spaces): ${x.replace(/\s/g,'').length}\nSentences: ${sent}\nParagraphs: ${paras}\nEstimated reading time: ${Math.max(1,Math.ceil(words.length/200))} min`}
+if(id==='jsonflatten'){let o=JSON.parse(x),flat={};function f(v,p=''){if(v&&typeof v==='object'){for(let k of Object.keys(v))f(v[k],p?p+'.'+k:k)}else flat[p]=v}f(o);out=JSON.stringify(flat,null,2)}
+if(id==='hexcolor'){let h=x.trim().replace('#','');if(h.length===3)h=[...h].map(c=>c+c).join('');if(!/^[0-9a-f]{6}$/i.test(h))throw Error('Enter HEX like #8b7cff');let n=parseInt(h,16),r=n>>16,g=(n>>8)&255,b=n&255;out=`HEX: #${h.toLowerCase()}\nRGB: rgb(${r}, ${g}, ${b})\nCSS: #${h.toLowerCase()}`}
+if(id==='csp'){let d=x.trim()||"default-src 'self'";out=`Content-Security-Policy: ${d.split(/\r?\n/).map(v=>v.trim()).filter(Boolean).join('; ')}`}
+if(id==='curlparse'){let m=x.match(/curl\s+(?:'|")?([^\s'"]+)/i);if(!m)throw Error('Could not locate URL in cURL command');let method=(x.match(/-X\s+['"]?(\w+)/i)||[])[1]||'GET',headers=[...x.matchAll(/-H\s+['"]([^'"]+)['"]/g)].map(a=>a[1]);out=`URL: ${m[1]}\nMethod: ${method}\nHeaders:\n${headers.join('\n')||'(none)'}`}
+if(id==='htmlmeta'){let esc=v=>v.replace(/&/g,'&amp;').replace(/\"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'),[title='',desc='',url='',image='']=x.split(/\r?\n/).map(esc);out=`<meta property="og:title" content="${title}">\n<meta property="og:description" content="${desc}">\n<meta property="og:url" content="${url}">\n<meta property="og:image" content="${image}">\n<meta name="twitter:card" content="summary_large_image">`}
+
+if(id==='jsonvalidate'){JSON.parse(x);out='✓ Valid JSON'}
+if(id==='jsonescape'){out=JSON.stringify(x).slice(1,-1)}
+if(id==='jsonunescape'){out=JSON.parse('"'+x+'"')}
+if(id==='jsonpointer'){let [j,pth]=x.split(/\r?\n/);let v=JSON.parse(j),ptr=(pth||'').trim();if(ptr!==''&&!ptr.startsWith('/'))throw Error('Pointer must be empty or start with /');for(let k of ptr===''?[]:ptr.slice(1).split('/').map(z=>{if(/~(?![01])/.test(z))throw Error('Invalid JSON Pointer escape');return z.replace(/~1/g,'/').replace(/~0/g,'~')}))v=v?.[k];out=JSON.stringify(v,null,2)}
+if(id==='jsonkeys'){let o=JSON.parse(x),a=[];function walk(v,p=''){if(v&&typeof v==='object'&&Object.keys(v).length){for(let [k,z] of Object.entries(v))walk(z,p+'/'+String(k).replace(/~/g,'~0').replace(/\//g,'~1'))}else a.push(`${p||'/'} : ${v===null?'null':Array.isArray(v)?'array':typeof v}`)}walk(o);out=a.join('\n')}
+if(id==='jsonarray'){let [j,op='unique',n='2']=x.split(/\r?\n/);let a=JSON.parse(j);if(!Array.isArray(a))throw Error('Expected JSON array');if(op==='sort')a.sort((a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true}));else if(op==='reverse')a.reverse();else if(op==='unique')a=[...new Map(a.map(v=>[JSON.stringify(v),v])).values()];else if(op==='chunk'){let size=Math.max(1,Number(n)||2);a=Array.from({length:Math.ceil(a.length/size)},(_,i)=>a.slice(i*size,(i+1)*size))}else throw Error('Operation: unique, sort, reverse, chunk');out=JSON.stringify(a,null,2)}
+if(id==='jsonschema'){let v=JSON.parse(x);function schema(z){if(z===null)return{type:'null'};if(Array.isArray(z))return{type:'array',items:z.length?schema(z[0]):{}};if(typeof z==='object')return{type:'object',properties:Object.fromEntries(Object.entries(z).map(([k,w])=>[k,schema(w)])),required:Object.keys(z)};return{type:typeof z==='number'?(Number.isInteger(z)?'integer':'number'):typeof z}}out=JSON.stringify({$schema:'https://json-schema.org/draft/2020-12/schema',...schema(v)},null,2)}
+if(id==='yamljson'){let obj={},stack=[obj],indents=[-1];for(let line of x.split(/\r?\n/)){if(!line.trim()||line.trim().startsWith('#'))continue;let m=line.match(/^(\s*)([^:]+):\s*(.*)$/);if(!m)throw Error('Lite parser expects key: value lines');let n=m[1].length,key=m[2].trim(),raw=m[3].trim();while(n<=indents[indents.length-1]){stack.pop();indents.pop()}let val=raw===''?{}:raw==='true'?true:raw==='false'?false:raw==='null'?null:/^-?\d+(?:\.\d+)?$/.test(raw)?Number(raw):raw.replace(/^['"]|['"]$/g,'');stack[stack.length-1][key]=val;if(raw===''){stack.push(stack[stack.length-1][key]);indents.push(n)}}out=JSON.stringify(obj,null,2)}
+if(id==='xmlvalidate'){let d=new DOMParser().parseFromString(x,'application/xml');let e=d.querySelector('parsererror');out=e?'XML parse error: '+e.textContent:'✓ XML appears well-formed'}
+if(id==='htmlstrip'){let d=new DOMParser().parseFromString(x,'text/html');out=d.body.textContent.replace(/\s+/g,' ').trim()}
+if(id==='htmlattrs'){let d=new DOMParser().parseFromString(x,'text/html');out=[...d.body.querySelectorAll('*')].map(el=>`${el.tagName.toLowerCase()}: ${[...el.attributes].map(a=>a.name+'="'+a.value+'"').join(', ')}`).join('\n')||'No elements found'}
+if(id==='cssselector'){out=CSS.escape(x)}
+if(id==='cssvars'){out=[...new Set([...x.matchAll(/(--[\w-]+)\s*:/g)].map(m=>m[1]))].join('\n')}
+if(id==='cssprefix'){let props=['user-select','appearance','backdrop-filter','transform'];out=x.split(/\r?\n/).map(line=>{let m=line.match(/^(\s*)([\w-]+)(\s*:\s*)(.*)$/);if(!m)return line;let p=m[2];if(!props.includes(p))return line;let pre=p==='user-select'?['-webkit-','-moz-']:p==='appearance'?['-webkit-','-moz-']:p==='backdrop-filter'?['-webkit-']:[];return [...pre.map(v=>`${m[1]}${v}${p}${m[3]}${m[4]}`),line].join('\n')}).join('\n')}
+if(id==='cssclamp'){let vals=x.split(/\r?\n/);let [min,max,vwmin,vwmax]=[16,32,320,1200].map((d,i)=>vals[i]?.trim()===''||vals[i]==null?d:Number(vals[i]));if(![min,max,vwmin,vwmax].every(Number.isFinite)||min<0||max<min||vwmin<=0||vwmax<=vwmin)throw Error('Use valid values: min size, max size, viewport min, viewport max; max size ≥ min size and viewport max > min');let slope=(max-min)/(vwmax-vwmin)*100,intercept=min-slope*vwmin/100;out=`clamp(${min}px, ${intercept.toFixed(3)}px + ${slope.toFixed(3)}vw, ${max}px)`}
+if(id==='jsescape'){out=x.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\r/g,'\\r').replace(/\n/g,'\\n').replace(/\t/g,'\\t')}
+if(id==='jsunescape'){out=x.replace(/\\(n|r|t|b|f|v|0|\\|')/g,(_,c)=>({n:'\n',r:'\r',t:'\t',b:'\b',f:'\f',v:'\v','0':'\0','\\':'\\',"'":"'"}[c]))}
+if(id==='jsobj'){let o=JSON.parse(x),p=new URLSearchParams();for(let [k,v] of Object.entries(o))p.append(k,typeof v==='object'?JSON.stringify(v):String(v));out=p.toString()}
+if(id==='queryjson'){let q=x.trim().replace(/^\?/,'');out=JSON.stringify(Object.fromEntries(new URLSearchParams(q)),null,2)}
+if(id==='urlresolve'){let [base,rel]=x.split(/\r?\n/);out=new URL(rel||'',base||location.href).href}
+if(id==='urlnormalize'){let u=new URL(x.trim());u.hostname=u.hostname.toLowerCase();u.hash=u.hash;out=u.href}
+if(id==='emailcheck'){let ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(x.trim());out=ok?'Looks syntactically valid (not deliverability-verified).':'Invalid common email syntax'}
+if(id==='ipprivate'){let ip=x.trim(),a=ip.split('.').map(Number);if(a.length!==4||a.some(n=>!Number.isInteger(n)||n<0||n>255))throw Error('Enter valid IPv4');let [A,B,C]=a;let type=A===10||A===172&&B>=16&&B<=31||A===192&&B===168?'Private':A===127?'Loopback':A===169&&B===254?'Link-local':A===0?'Unspecified/reserved':A===100&&B>=64&&B<=127?'Carrier-grade NAT':A===192&&B===0&&C===2||A===198&&B===51&&C===100||A===203&&B===0&&C===113?'Documentation':A===198&& (B===18||B===19)?'Benchmarking':A>=224?'Multicast/reserved':'Public';out=`${ip}: ${type}`}
+if(id==='macformat'){let raw=x.trim();if(!/^(?:[0-9a-f]{12}|[0-9a-f]{2}(?::[0-9a-f]{2}){5}|[0-9a-f]{2}(?:-[0-9a-f]{2}){5}|[0-9a-f]{4}(?:\.[0-9a-f]{4}){2})$/i.test(raw))throw Error('Use 12 hex digits, e.g. AA:BB:CC:DD:EE:FF');let h=raw.replace(/[^0-9a-f]/gi,'').toUpperCase();out=h.match(/.{2}/g).join(':')}
+if(id==='portcheck'){let raw=x.trim(),n=Number(raw);out=raw&&Number.isInteger(n)&&n>=0&&n<=65535?`${n} is a ${n===0?'reserved/special':'valid'} port number (${n===0?'reserved/special':'1–65535 usable range'})`:'Invalid port: enter an integer from 0–65535'}
+if(id==='chmod'){let n=x.trim();if(!/^[0-7]{3,4}$/.test(n))throw Error('Enter octal like 755 or 4755');let special=n.length===4?Number.parseInt(n[0],8):0,digits=n.slice(-3).split('').map(v=>Number.parseInt(v,8)),sym=digits.map((z,i)=>{let execute=z&1,bit=i===0?4:i===1?2:1,active=special&bit;return (z&4?'r':'-')+(z&2?'w':'-')+(execute?(active?'s':'x'):(active?'S':'-'))}).join('');out=`${n} → ${sym}\nSetuid: ${!!(special&4)} | Setgid: ${!!(special&2)} | Sticky: ${!!(special&1)}`}
+if(id==='byteshex'){let [mode='decimal-to-hex',raw='']=x.includes('\n')?x.split(/\r?\n/):['decimal-to-hex',x],t=raw.trim();if(mode==='hex-to-decimal'){out=t.split(/[\s,]+/).filter(Boolean).map(h=>{if(!/^(?:0x)?[0-9a-f]{1,2}$/i.test(h))throw Error('Use hex byte values like 41 0A FF');return parseInt(h.replace(/^0x/i,''),16)}).join(' ')}else if(mode==='decimal-to-hex'){out=t.split(/[\s,]+/).filter(Boolean).map(v=>{let n=Number(v);if(!Number.isInteger(n)||n<0||n>255)throw Error('Bytes must be 0–255');return n.toString(16).padStart(2,'0').toUpperCase()}).join(' ')}else throw Error('Mode must be decimal-to-hex or hex-to-decimal')}
+if(id==='ascii'){out=[...x].map(c=>`${c}  U+${c.codePointAt(0).toString(16).toUpperCase().padStart(4,'0')}  ${c.codePointAt(0)}`).join('\n')}
+if(id==='unicode'){out=[...x].map(c=>`${JSON.stringify(c)} → U+${c.codePointAt(0).toString(16).toUpperCase().padStart(4,'0')} (${c.codePointAt(0)})`).join('\n')}
+if(id==='textwrap'){let [txt,w='80']=x.split(/\r?\n/),width=Number(w)||80;if(!Number.isInteger(width)||width<10||width>300)throw Error('Width must be an integer from 10 to 300');out=txt.split(/\r?\n/).map(par=>par.trim().split(/\s+/).filter(Boolean).reduce((a,word)=>{let i=a.length-1;if(i<0||a[i].length+word.length+1>width)a.push(word);else a[i]+=' '+word;return a},[]).join('\n')).join('\n')}
+if(id==='textreverse'){out=x.split(/\r?\n/).map(line=>[...line].reverse()).reverse().join('\n')}
+if(id==='lineprefix'){let [txt,pre='',suf='']=x.split(/\r?\n/);out=txt.split(/\r?\n/).map(line=>pre+line+suf).join('\n')}
+if(id==='extractemails'){out=[...new Set(x.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi)||[])].join('\n')}
+if(id==='extracturls'){out=[...new Set(x.match(/https?:\/\/[^\s"'<>]+/gi)||[])].join('\n')}
+if(id==='numberwords'){let [v,prec='2']=x.split(/\r?\n/),n=Number(v);if(!Number.isFinite(n))throw Error('Enter a number');out=n.toLocaleString(undefined,{maximumFractionDigits:Math.max(0,Math.min(10,Number(prec)||0))})}
+if(id==='randomdata'){let [kind='int',count='5',min='1',max='100']=x.split(/\r?\n/),n=Math.max(1,Math.min(100,Number(count)||5)),lo=Number(min),hi=Number(max);if(kind==='int'&&(!Number.isSafeInteger(lo)||!Number.isSafeInteger(hi)||hi<lo))throw Error('Integer range must be valid and max ≥ min');out=Array.from({length:n},()=>kind==='hex'?Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>b.toString(16).padStart(2,'0')).join(''):kind==='name'?['Avery','Jordan','Taylor','Morgan','Riley'][crypto.getRandomValues(new Uint8Array(1))[0]%5]:String(lo+secureRandomIndex(hi-lo+1))).join('\n')}
+if(id==='mime'){let ext=x.trim().toLowerCase().replace(/^\./,'');let map={html:'text/html',css:'text/css',js:'text/javascript',mjs:'text/javascript',json:'application/json',xml:'application/xml',svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',gif:'image/gif',pdf:'application/pdf',txt:'text/plain',csv:'text/csv',md:'text/markdown',wasm:'application/wasm',zip:'application/zip',mp3:'audio/mpeg',mp4:'video/mp4'};out=map[ext]||'Unknown extension'}
+if(id==='httpstatus'){let n=Number(x.trim()),map={200:'OK — request succeeded',201:'Created — resource created',204:'No Content — success without body',301:'Moved Permanently',302:'Found — temporary redirect',304:'Not Modified — cached response',400:'Bad Request',401:'Unauthorized — authentication required',403:'Forbidden',404:'Not Found',405:'Method Not Allowed',409:'Conflict',422:'Unprocessable Content',429:'Too Many Requests',500:'Internal Server Error',502:'Bad Gateway',503:'Service Unavailable',504:'Gateway Timeout'};out=map[n]||'No short reference entry for this status'}
+if(id==='htmlencodeurl'){out=x.split(/\r?\n/).map(v=>v.startsWith('decode:')?decodeURIComponent(v.slice(7)):encodeURIComponent(v)).join('\n')}
+
+setResult(out)}catch(e){setResult('Input error: '+e.message)}});on('copy',()=>copy($('#result').textContent))}
+
+}
+$('#close').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open')){closeModal();return}if(e.key==='Tab'&&modal.classList.contains('open')){let f=[...modal.querySelectorAll('button:not([disabled]),input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(x=>x.offsetParent!==null);if(f.length){let first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}if((e.key==='/'||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'))&&!/input|textarea|select/i.test(document.activeElement.tagName)&&!modal.classList.contains('open')){e.preventDefault();$('#search').focus();$('#search').select()}});render();
+ 
+})();
+
+// Scroll reveal: observe only cards; animate transform/opacity, no per-frame handlers.
+(function(){
+ const style=document.createElement('style');
+ style.textContent='.toolcard.reveal{opacity:0;transform:translateY(22px)}.toolcard.reveal.in-view{opacity:1;transform:translateY(0);transition:opacity .42s ease,transform .52s cubic-bezier(.2,.8,.2,1)}@media(prefers-reduced-motion:reduce){.toolcard.reveal,.toolcard.reveal.in-view{opacity:1;transform:none;transition:none}}';
+ document.head.appendChild(style);
+ if(!('IntersectionObserver' in window))return;
+ const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target)}}),{rootMargin:'0px 0px -35px 0px',threshold:.05});
+ const scan=()=>document.querySelectorAll('.toolcard:not(.in-view)').forEach(el=>{el.classList.add('reveal');io.observe(el)});
+ new MutationObserver(scan).observe(document.getElementById('grid'),{childList:true});
+ scan();
+})();
+</script>
+<script>
+(()=>{const b=document.getElementById('copyUpi');if(!b)return;b.addEventListener('click',async()=>{const value='pixelhere@axl';let copied=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(value);copied=true}}catch(_){}if(!copied){const t=document.createElement('textarea');t.value=value;t.setAttribute('readonly','');t.style.position='fixed';t.style.left='-9999px';document.body.appendChild(t);t.select();try{copied=document.execCommand('copy')}catch(_){}t.remove()}if(copied){b.textContent='✓ Copied';b.setAttribute('aria-label','UPI ID copied');const toastEl=document.getElementById('toast');if(toastEl){toastEl.textContent='UPI ID copied';toastEl.classList.add('show');setTimeout(()=>toastEl.classList.remove('show'),1800)}setTimeout(()=>{b.textContent='⧉ Copy UPI';b.setAttribute('aria-label','Copy UPI ID pixelhere@axl')},1600)}else{b.textContent=value;setTimeout(()=>{b.textContent='⧉ Copy UPI'},2200)}})})();
+</script>
+</body>
+</html>
